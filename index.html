@@ -19,7 +19,7 @@
 
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
-
+        
         html, body {
             height: 100%;
             width: 100%;
@@ -303,14 +303,14 @@
 
         @keyframes creepyGlow {
             0%, 100% { 
-                opacity: 0.7; 
+                opacity: 0.7;
                 text-shadow: 
                     0 0 20px rgba(139, 0, 0, 0.8),
                     0 0 40px rgba(139, 0, 0, 0.5),
                     0 0 60px rgba(139, 0, 0, 0.3);
             }
             50% { 
-                opacity: 1; 
+                opacity: 1;
                 text-shadow: 
                     0 0 30px rgba(139, 0, 0, 1),
                     0 0 60px rgba(139, 0, 0, 0.8),
@@ -500,17 +500,11 @@
     </style>
 </head>
 <body>
-    <!-- Audio Player usando iframe (oculto) -->
-    <iframe 
-        id="bgMusic" 
-        src="" 
-        style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"
-        allow="autoplay">
-    </iframe>
+    <audio id="bgMusic" loop>
+        </audio>
     
     <div class="particles" id="particles"></div>
     
-    <!-- Página Primária -->
     <div id="primaryPage" class="primary-container">
         <div class="question fade-in">você tem certeza disso?</div>
         
@@ -527,7 +521,7 @@
     </div>
     
     <div class="container">
-        <!-- Página de Login -->
+      
         <div id="loginPage" class="login-page center">
             <div class="symbol-img">
                 <img src="https://i.imgur.com/lbX9hAN.jpg" alt="símbolo">
@@ -553,7 +547,6 @@
             <div class="hint">ele está no começo</div>
         </div>
 
-        <!-- Página Principal -->
         <div id="mainPage" class="main-page center">
             <div class="symbol-img fade-in">
                 <div class="symbol-text">◉</div>
@@ -590,7 +583,6 @@
             <div class="divider fade-in"></div>
         </div>
 
-        <!-- Página Final -->
         <div id="finalPage" class="main-page center">
             <div class="symbol-img fade-in">
                 <div class="symbol-text">◉</div>
@@ -621,15 +613,16 @@
     </div>
 
     <script>
-        // Controle de áudio com iframe
-        const bgMusicFrame = document.getElementById('bgMusic');
+        // *** MUDANÇA 2: JavaScript atualizado para <audio> ***
+        
+        // Agora pega o elemento <audio>
+        const bgMusicPlayer = document.getElementById('bgMusic'); 
         let musicStarted = false;
 
         // Criar partículas
         const particlesContainer = document.getElementById('particles');
         const isMobile = window.innerWidth < 768;
         const particleCount = isMobile ? 40 : 80;
-        
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
@@ -658,9 +651,23 @@
         function acceptChallenge() {
             // Iniciar música ao clicar em "Sim"
             if (!musicStarted) {
-                bgMusicFrame.src = "https://archive.org/embed/verdadeira-arte-a-noiva-fantasma&autoplay=1&loop=1";
+                
+                // 1. Link direto para o arquivo .mp3
+                const directAudioLink = "https://archive.org/download/verdadeira-arte-a-noiva-fantasma/verdadeira-arte-a-noiva-fantasma.mp3";
+                
+                bgMusicPlayer.src = directAudioLink;
+                
+                // 2. *** SOLUÇÃO DO VOLUME ***
+                // Volume de 0.0 (mudo) a 1.0 (máximo)
+                bgMusicPlayer.volume = 0.1; // Volume em 10%
+                
+                // 3. Toca a música
+                bgMusicPlayer.play().catch(error => {
+                    console.error("Erro ao tentar tocar a música:", error);
+                });
+                
                 musicStarted = true;
-                console.log('Música iniciada');
+                console.log('Música iniciada com volume baixo (10%)');
             }
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
@@ -672,7 +679,7 @@
                 loginPage.style.opacity = '0';
                 loginPage.style.transition = 'opacity 1.5s ease-in';
                 loginPage.scrollTop = 0;
-                
+                 
                 setTimeout(() => {
                     loginPage.style.opacity = '1';
                 }, 50);
@@ -697,7 +704,7 @@
             
             if (enteredPassword === correctPassword) {
                 errorMsg.classList.remove('show');
-                
+                 
                 loginPage.style.transition = 'opacity 1.5s ease-out';
                 loginPage.style.opacity = '0';
                 
@@ -707,12 +714,12 @@
                     mainPage.style.opacity = '0';
                     mainPage.style.transition = 'opacity 1.5s ease-in';
                     mainPage.scrollTop = 0;
-                    
+                     
                     setTimeout(() => {
                         mainPage.style.opacity = '1';
                     }, 50);
                 }, 1500);
-                
+                 
                 passwordInput.value = '';
             } else {
                 errorMsg.classList.add('show');
@@ -742,7 +749,7 @@
                     finalPage.style.opacity = '0';
                     finalPage.style.transition = 'opacity 1.5s ease-in';
                     finalPage.scrollTop = 0;
-                    
+                     
                     setTimeout(() => {
                         finalPage.style.opacity = '1';
                     }, 50);
