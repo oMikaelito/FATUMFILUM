@@ -519,7 +519,8 @@
             </button>
         </div>
         
-        <div id="warningMsg" class="warning-text">você não tem escolha</div>
+        <div id="warningMsg" class="warning-text">você não 
+            tem escolha</div>
     </div>
     
     <div class="container">
@@ -550,6 +551,7 @@
         </div>
 
         <div id="mainPage" class="main-page center">
+            
             <div class="symbol-img fade-in">
                 <div class="symbol-text">◉</div>
             </div>
@@ -615,7 +617,15 @@
     </div>
 
     <script>
-        const bgMusicPlayer = document.getElementById('bgMusic'); 
+        // --- LÓGICA DE ÁUDIO ATUALIZADA (Web Audio API) ---
+        let audioCtx;
+        let audioBuffer;
+        let sourceNode;
+        // Pega a URL de áudio diretamente da tag <audio>
+        const audioUrl = document.getElementById('bgMusic').src;
+        // --- FIM DA ATUALIZAÇÃO ---
+
+        const bgMusicPlayer = document.getElementById('bgMusic');
         let musicStarted = false;
 
         // Criar partículas
@@ -647,17 +657,70 @@
         const secondPasswordInput = document.getElementById('secondPassword');
         const errorMsg2 = document.getElementById('errorMsg2');
 
-        async function acceptChallenge() {
-            if (!musicStarted) {
-                bgMusicPlayer.volume = 0.1;
+        // --- NOVA FUNÇÃO DE ÁUDIO (Web Audio API) ---
+        async function loadAndPlayAudio() {
+            try {
+                // 1. Cria o Contexto de Áudio (DEVE ser após um clique)
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
                 
+                // 2. Garante que o contexto possa "rodar" (necessário em alguns browsers)
+                if (audioCtx.state === 'suspended') {
+                    await audioCtx.resume();
+                }
+
+                // 3. Se o áudio ainda não foi baixado, baixa e decodifica
+                if (!audioBuffer) {
+                    console.log('Baixando e decodificando áudio...');
+                    const response = await fetch(audioUrl);
+                    const arrayBuffer = await response.arrayBuffer();
+                    audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+                    console.log('Áudio pronto.');
+                }
+
+                // 4. Para qualquer música anterior (se houver)
+                if (sourceNode) {
+                    sourceNode.stop();
+                }
+
+                // 5. Cria o "player" (Source Node)
+                sourceNode = audioCtx.createBufferSource();
+                sourceNode.buffer = audioBuffer;
+                sourceNode.loop = true; // <-- A MÁGICA DO LOOP SEM CORTE
+
+                // 6. Cria o controle de volume (Gain Node)
+                const gainNode = audioCtx.createGain();
+                // Define o volume (0.1 = 10%)
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); 
+
+                // 7. Conecta tudo: Player -> Volume -> Caixas de Som
+                sourceNode.connect(gainNode).connect(audioCtx.destination);
+                
+                // 8. Toca
+                sourceNode.start(0);
+                musicStarted = true;
+                console.log('Música iniciada com sucesso (gapless).');
+
+            } catch (error) {
+                console.error("Erro ao tocar música com Web Audio API:", error);
+                // Fallback para o método antigo se falhar
+                console.log("Tentando fallback para <audio> tag...");
                 try {
+                    bgMusicPlayer.volume = 0.1;
                     await bgMusicPlayer.play();
                     musicStarted = true;
-                    console.log('Música iniciada com sucesso.');
-                } catch (error) {
-                    console.error("Erro ao tocar música:", error);
+                } catch (fallbackError) {
+                    console.error("Erro no fallback do áudio:", fallbackError);
                 }
+            }
+        }
+        // --- FIM DA NOVA FUNÇÃO ---
+
+        async function acceptChallenge() {
+            if (!musicStarted) {
+                // --- CHAMADA DA NOVA FUNÇÃO DE ÁUDIO ---
+                await loadAndPlayAudio();
             }
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
@@ -669,7 +732,7 @@
                 loginPage.style.opacity = '0';
                 loginPage.style.transition = 'opacity 1.5s ease-in';
                 loginPage.scrollTop = 0;
-                 
+                
                 setTimeout(() => {
                     loginPage.style.opacity = '1';
                 }, 50);
@@ -694,7 +757,7 @@
             
             if (enteredPassword === correctPassword) {
                 errorMsg.classList.remove('show');
-                 
+                
                 loginPage.style.transition = 'opacity 1.5s ease-out';
                 loginPage.style.opacity = '0';
                 
@@ -704,12 +767,13 @@
                     mainPage.style.opacity = '0';
                     mainPage.style.transition = 'opacity 1.5s ease-in';
                     mainPage.scrollTop = 0;
-                     
+                    
                     setTimeout(() => {
                         mainPage.style.opacity = '1';
                     }, 50);
+                
                 }, 1500);
-                 
+                    
                 passwordInput.value = '';
             } else {
                 errorMsg.classList.add('show');
@@ -739,10 +803,11 @@
                     finalPage.style.opacity = '0';
                     finalPage.style.transition = 'opacity 1.5s ease-in';
                     finalPage.scrollTop = 0;
-                     
+                    
                     setTimeout(() => {
                         finalPage.style.opacity = '1';
                     }, 50);
+                
                 }, 1500);
                 
                 secondPasswordInput.value = '';
