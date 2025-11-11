@@ -11,8 +11,6 @@
         });
     </script>
     <style>
-        /* [SEU CSS COMPLETO VAI AQUI - NENHUMA MUDANÇA NECESSÁRIA] */
-        /* ... (O CSS é muito longo para colar aqui, mas use o seu original) ... */
         * {
             margin: 0;
             padding: 0;
@@ -504,7 +502,7 @@
 <body>
     
     <audio id="bgMusic" loop preload="auto">
-        <source src="verdadeira-arte-a-noiva-fantasma.mp3" type="audio/mpeg">
+        <source src="https://github.com/oMikaelito/FATUMFILUM/raw/main/Verdadeira%20Arte%20A%20Noiva%20Fantasma.mp3" type="audio/mpeg">
     </audio>
     
     <div class="particles" id="particles"></div>
@@ -649,28 +647,19 @@
         const secondPasswordInput = document.getElementById('secondPassword');
         const errorMsg2 = document.getElementById('errorMsg2');
 
-        
-        // *** MUDANÇA 2 (JavaScript) ***
-        // A função agora é 'async' para esperar o 'play()'
-        
         async function acceptChallenge() {
-            // Iniciar música ao clicar em "Sim"
             if (!musicStarted) {
-                bgMusicPlayer.volume = 0.1; // Volume em 10%
+                bgMusicPlayer.volume = 0.1;
                 
                 try {
-                    // Tenta tocar a música e ESPERA
                     await bgMusicPlayer.play();
                     musicStarted = true;
                     console.log('Música iniciada com sucesso.');
                 } catch (error) {
-                    // Se falhar (ex: política de autoplay), avisa no console
-                    console.error("Erro ao tocar música (autoplay bloqueado?):", error);
-                    // A animação continua de qualquer forma
+                    console.error("Erro ao tocar música:", error);
                 }
             }
 
-            // O código abaixo só roda DEPOIS do 'await' acima
             primaryPage.style.transition = 'opacity 1.5s ease-out';
             primaryPage.style.opacity = '0';
             
