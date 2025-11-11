@@ -692,7 +692,7 @@
                 // 6. Cria o controle de volume (Gain Node)
                 const gainNode = audioCtx.createGain();
                 // Define o volume (0.1 = 10%)
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); 
+                gainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
 
                 // 7. Conecta tudo: Player -> Volume -> Caixas de Som
                 sourceNode.connect(gainNode).connect(audioCtx.destination);
