@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+input[type="password"] {
+            width: 100%;
+            padding: 15px 10px;
+            background: rgba(20, 20, 20, 0.4);
+            border: none;
+            border-bottom: 2px solid #2a2a2a;
+            color: #999;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            text-align: center;
+            letter<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -201,7 +211,36 @@
                 0 0 20px rgba(139, 0, 0, 0.1);
         }
 
-        input[type="password"]::placeholder {
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 10px;
+            background: rgba(20, 20, 20, 0.4);
+            border: none;
+            border-bottom: 2px solid #2a2a2a;
+            color: #999;
+            font-size: clamp(14px, 3.5vw, 16px);
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            text-align: center;
+            letter-spacing: 6px;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-bottom-color: #4a4a4a;
+            background: rgba(30, 30, 30, 0.5);
+            color: #ccc;
+            box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(139, 0, 0, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #333;
+            letter-spacing: 3px;
+            opacity: 0;
+        }
             color: #333;
             letter-spacing: 3px;
             opacity: 0;
@@ -561,7 +600,7 @@
 
             <form id="loginForm">
                 <input 
-                    type="password" 
+                    type="text" 
                     id="password" 
                     placeholder="" 
                     required 
@@ -598,7 +637,7 @@
 
             <form id="secondForm">
                 <input 
-                    type="password" 
+                    type="text" 
                     id="secondPassword" 
                     placeholder="" 
                     required 
@@ -608,8 +647,6 @@
             </form>
 
             <div class="divider fade-in"></div>
-
-            <button onclick="logout()">voltar</button>
         </div>
 
         <!-- Página Final -->
@@ -639,8 +676,6 @@
             </div>
 
             <div class="divider fade-in"></div>
-
-            <button onclick="logout()">voltar</button>
         </div>
     </div>
 
