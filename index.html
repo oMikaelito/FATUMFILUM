@@ -500,8 +500,9 @@
     </style>
 </head>
 <body>
-    <audio id="bgMusic" loop>
-        </audio>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://archive.org/download/verdadeira-arte-a-noiva-fantasma/verdadeira-arte-a-noiva-fantasma.mp3" type="audio/mpeg">
+    </audio>
     
     <div class="particles" id="particles"></div>
     
@@ -564,7 +565,7 @@
 
             <div class="divider fade-in"></div>
 
-            <div class="message fade-in">
+            <div class="message">
                 o que corre nas veias<br>
                 o que nos mantém vivos
             </div>
@@ -613,9 +614,6 @@
     </div>
 
     <script>
-        // *** MUDANÇA 2: JavaScript atualizado para <audio> ***
-        
-        // Agora pega o elemento <audio>
         const bgMusicPlayer = document.getElementById('bgMusic'); 
         let musicStarted = false;
 
@@ -648,26 +646,21 @@
         const secondPasswordInput = document.getElementById('secondPassword');
         const errorMsg2 = document.getElementById('errorMsg2');
 
+        // *** MUDANÇA 2: Função 'acceptChallenge' simplificada ***
         function acceptChallenge() {
             // Iniciar música ao clicar em "Sim"
             if (!musicStarted) {
                 
-                // 1. Link direto para o arquivo .mp3
-                const directAudioLink = "https://archive.org/download/verdadeira-arte-a-noiva-fantasma/verdadeira-arte-a-noiva-fantasma.mp3";
-                
-                bgMusicPlayer.src = directAudioLink;
-                
-                // 2. *** SOLUÇÃO DO VOLUME ***
-                // Volume de 0.0 (mudo) a 1.0 (máximo)
+                // 1. Definir o volume (o 'src' já está no HTML)
                 bgMusicPlayer.volume = 0.1; // Volume em 10%
                 
-                // 3. Toca a música
+                // 2. Apenas toca a música
                 bgMusicPlayer.play().catch(error => {
                     console.error("Erro ao tentar tocar a música:", error);
                 });
                 
                 musicStarted = true;
-                console.log('Música iniciada com volume baixo (10%)');
+                console.log('Música iniciada');
             }
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
