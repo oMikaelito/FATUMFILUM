@@ -11,6 +11,7 @@
         });
     </script>
     <style>
+        /* [SEU CSS COMPLETO VAI AQUI] */
         * {
             margin: 0;
             padding: 0;
@@ -501,7 +502,8 @@
 </head>
 <body>
     
-    <audio id="bgMusic" loop preload="auto">
+    <audio id="bgMusic" loop preload="auto" autoplay muted>
+        <source src="https://github.com/oMikaelito/FATUMFILUM/raw/main/Verdadeira%20Arte%20A%20Noiva%20Fantasma.ogg" type="audio/ogg">
         <source src="https://github.com/oMikaelito/FATUMFILUM/raw/main/Verdadeira%20Arte%20A%20Noiva%20Fantasma.mp3" type="audio/mpeg">
     </audio>
     
@@ -615,10 +617,14 @@
     </div>
 
     <script>
+        // JavaScript permanece o MESMO da última vez
+        // Nenhuma mudança é necessária aqui.
+        
         const bgMusicPlayer = document.getElementById('bgMusic'); 
-        let musicStarted = false;
+        let soundActivated = false;
 
-        // Criar partículas
+        bgMusicPlayer.play().catch(e => console.log("Autoplay mudo iniciado ou já em progresso."));
+
         const particlesContainer = document.getElementById('particles');
         const isMobile = window.innerWidth < 768;
         const particleCount = isMobile ? 40 : 80;
@@ -646,18 +652,14 @@
         const secondForm = document.getElementById('secondForm');
         const secondPasswordInput = document.getElementById('secondPassword');
         const errorMsg2 = document.getElementById('errorMsg2');
-
+        
         async function acceptChallenge() {
-            if (!musicStarted) {
+            
+            if (!soundActivated) {
+                bgMusicPlayer.muted = false;
                 bgMusicPlayer.volume = 0.1;
-                
-                try {
-                    await bgMusicPlayer.play();
-                    musicStarted = true;
-                    console.log('Música iniciada com sucesso.');
-                } catch (error) {
-                    console.error("Erro ao tocar música:", error);
-                }
+                soundActivated = true;
+                console.log('Som ativado pelo usuário.');
             }
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
