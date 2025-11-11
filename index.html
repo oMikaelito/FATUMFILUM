@@ -500,10 +500,13 @@
     </style>
 </head>
 <body>
-    <!-- Audio Player -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://archive.org/download/verdadeira-arte-a-noiva-fantasma/Verdadeira%20Arte%20-%20A%20Noiva%20Fantasma.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Audio Player usando iframe (oculto) -->
+    <iframe 
+        id="bgMusic" 
+        src="" 
+        style="position: fixed; top: -1000px; left: -1000px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"
+        allow="autoplay">
+    </iframe>
     
     <div class="particles" id="particles"></div>
     
@@ -618,18 +621,9 @@
     </div>
 
     <script>
-        // Configurar áudio
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.volume = 0.1; // 10% do volume
-        
-        // Debug: verificar se o áudio carregou
-        bgMusic.addEventListener('canplaythrough', () => {
-            console.log('Áudio carregado e pronto para tocar');
-        });
-        
-        bgMusic.addEventListener('error', (e) => {
-            console.log('Erro ao carregar áudio:', e);
-        });
+        // Controle de áudio com iframe
+        const bgMusicFrame = document.getElementById('bgMusic');
+        let musicStarted = false;
 
         // Criar partículas
         const particlesContainer = document.getElementById('particles');
@@ -663,18 +657,10 @@
 
         function acceptChallenge() {
             // Iniciar música ao clicar em "Sim"
-            const playPromise = bgMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('Música iniciada com sucesso');
-                }).catch((error) => {
-                    console.log('Erro ao iniciar música:', error);
-                    // Tentar novamente após um breve delay
-                    setTimeout(() => {
-                        bgMusic.play().catch(e => console.log('Segunda tentativa falhou:', e));
-                    }, 100);
-                });
+            if (!musicStarted) {
+                bgMusicFrame.src = "https://archive.org/embed/verdadeira-arte-a-noiva-fantasma&autoplay=1&loop=1";
+                musicStarted = true;
+                console.log('Música iniciada');
             }
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
