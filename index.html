@@ -538,8 +538,8 @@
 </head>
 <body>
     <!-- Audio Player -->
-    <audio id="bgMusic" loop volume="0.3">
-        <source src="https://drive.google.com/uc?export=download&id=1r_9AT1T0sTa3G9uniSZE2OuYoNUAXXs-" type="audio/mpeg">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://archive.org/download/verdadeira-arte-a-noiva-fantasma/Verdadeira%20Arte%20-%20A%20Noiva%20Fantasma.mp3" type="audio/mpeg">
     </audio>
     
     <!-- Botão de controle de áudio -->
@@ -706,10 +706,14 @@
                 audioToggle.classList.remove('playing');
                 isPlaying = false;
             } else {
-                bgMusic.play().catch(err => console.log('Erro ao tocar:', err));
-                audioIcon.textContent = '🔊';
-                audioToggle.classList.add('playing');
-                isPlaying = true;
+                bgMusic.play().then(() => {
+                    audioIcon.textContent = '🔊';
+                    audioToggle.classList.add('playing');
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log('Erro ao tocar:', err);
+                    alert('Não foi possível carregar a música. Verifique o link do arquivo.');
+                });
             }
         });
 
