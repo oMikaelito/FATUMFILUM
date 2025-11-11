@@ -34,7 +34,8 @@
             align-items: center;
             color: #666;
             position: relative;
-            padding: 10px;
+            padding: 0;
+            margin: 0;
         }
 
         body::before {
@@ -83,8 +84,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: 1;
+            padding: 20px;
         }
 
         .login-page, .main-page {
