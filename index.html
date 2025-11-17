@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>...</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@400&family=Creepster&family=EB+Garamond:wght@400&family=Fredoka+One&family=JetBrains+Mono:wght@300;400&family=MedievalSharp&family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&family=Special+Elite&family=Uncial+Antiqua&family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style">
+
     <script>
         history.pushState(null, null, location.pathname);
-        window.addEventListener('popstate', function() {
+window.addEventListener('popstate', function() {
             history.pushState(null, null, location.pathname);
         });
-    </script>
+</script>
     <style>
         * {
             margin: 0;
-            padding: 0;
+padding: 0;
             box-sizing: border-box;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
         
         html, body {
             height: 100%;
-            width: 100%;
+width: 100%;
             overflow-x: hidden;
         }
 
         body {
             font-family: 'JetBrains Mono', 'Consolas', monospace;
-            background: #000;
+background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,42 +40,117 @@
             position: relative;
             padding: 0;
             margin: 0;
-        }
+}
 
         body::before {
             content: '';
-            position: fixed;
+position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+background: 
                 radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(139, 0, 0, 0.06) 0%, transparent 50%);
-            pointer-events: none;
+pointer-events: none;
+            transition: background 1s ease;
         }
+
+        body.purple-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(147, 112, 219, 0.06) 0%, transparent 50%);
+}
+
+        body.golden-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(218, 165, 32, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(205, 133, 63, 0.06) 0%, transparent 50%);
+}
+
+        body.ash-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(200, 200, 200, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(200, 200, 200, 0.06) 0%, transparent 50%);
+}
+
+        body.dwarven-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 100, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(34, 139, 34, 0.06) 0%, transparent 50%);
+}
+        
+        body.blue-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 0, 139, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(30, 144, 255, 0.06) 0%, transparent 50%);
+}
+        
+        body.rust-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(165, 42, 42, 0.06) 0%, transparent 50%);
+}
+
+        /* Fundo Rosa */
+        body.pink-theme::before {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(219, 39, 119, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(250, 218, 221, 0.06) 0%, transparent 50%);
+}
 
         body::after {
             content: '';
-            position: fixed;
+position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: repeating-linear-gradient(
+background: repeating-linear-gradient(
                 0deg,
                 transparent,
                 transparent 2px,
                 rgba(0, 0, 0, 0.03) 2px,
                 rgba(0, 0, 0, 0.03) 4px
-            );
+          
+
+
+
+  );
             pointer-events: none;
             opacity: 0.5;
         }
+        
+        /* --- EFEITO NÉVOA (COR CINZA) --- */
+        #fogOverlay {
+            position: fixed;
+bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40vh; /* 40% da altura da tela */
+            background: linear-gradient(0deg, 
+                rgba(120, 120, 120, 0.5) 0%, /* Cor da névoa (cinza) */
+                rgba(120, 120, 120, 0.2) 50%,
+                transparent 100%
+         
+
+
+
+   );
+            pointer-events: none;
+            z-index: 2; 
+            opacity: 0; 
+            transition: opacity 1.5s ease;
+}
+        body.rust-theme #fogOverlay {
+            opacity: 1;
+/* Aparece só no tema ferrugem */
+        }
+        /* --- FIM NÉVOA --- */
 
         .container {
             width: 100%;
-            max-width: 500px;
+max-width: 460px; 
             position: relative;
             z-index: 1;
             margin: auto;
@@ -79,7 +158,7 @@
 
         .primary-container {
             width: 100%;
-            height: 100vh;
+height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -89,250 +168,1244 @@
             left: 0;
             z-index: 1;
             padding: 20px;
-        }
+}
 
         .login-page, .main-page {
             background: rgba(10, 10, 10, 0.6);
-            border: 1px solid rgba(100, 100, 100, 0.1);
+border: 1px solid rgba(100, 100, 100, 0.1);
             border-radius: 2px;
-            padding: clamp(30px, 8vw, 60px) clamp(20px, 6vw, 40px);
-            box-shadow: 
+            padding: clamp(30px, 8vw, 50px) clamp(20px, 6vw, 35px);
+box-shadow: 
                 0 0 50px rgba(0, 0, 0, 0.5),
                 inset 0 0 50px rgba(0, 0, 0, 0.2);
-            max-height: 95vh;
+max-height: 95vh;
             overflow-y: auto;
-        }
+            transition: border-color 1s ease, box-shadow 1s ease;
+}
 
         .login-page {
             display: none;
-        }
+}
 
         .main-page {
             display: none;
+}
+
+        /* --- TEMA VERMELHO (FONTE 'Creepster') --- */
+        .red-theme-page {
+            border: 1px solid rgba(139, 0, 0, 0.2);
+box-shadow: 
+                0 0 50px rgba(139, 0, 0, 0.3),
+                inset 0 0 50px rgba(139, 0, 0, 0.1);
+}
+
+        .red-theme-page,
+        .red-theme-page * {
+            font-family: 'Creepster', cursive !important;
+font-weight: 400 !important; 
+            letter-spacing: 2px; 
         }
+
+        .red-theme-page input[type="text"] {
+            font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+font-weight: 400 !important; 
+            letter-spacing: 4px;
+        }
+        
+        .red-theme-page .content,
+        .red-theme-page .message {
+            color: #c33;
+text-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
+            line-height: 2.2; 
+            font-size: clamp(16px, 3.8vw, 20px); 
+            letter-spacing: 2px;
+}
+
+        .red-theme-page .error {
+            color: #ff4444;
+letter-spacing: 2px;
+            font-size: clamp(14px, 3.3vw, 18px); 
+        }
+
+        .red-theme-page .divider::before {
+             content: '♦';
+color: #c33;
+             font-size: 10px;
+        }
+        /* --- FIM TEMA VERMELHO --- */
+
+
+        /* --- TEMA ROXO (FONTE 'VT323') --- */
+        .purple-page {
+            border: 1px solid rgba(138, 43, 226, 0.2);
+box-shadow: 
+                0 0 50px rgba(138, 43, 226, 0.3),
+                inset 0 0 50px rgba(138, 43, 226, 0.1);
+}
+
+        .purple-page,
+        .purple-page * {
+            font-family: 'VT323', 'Courier New', monospace !important;
+font-weight: 400 !important;
+        }
+
+        .purple-page .content {
+            color: #a78bfa;
+letter-spacing: 1px;
+            font-size: clamp(18px, 4vw, 22px); 
+        }
+
+        .purple-page .message {
+            color: #a78bfa;
+letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: clamp(18px, 4vw, 22px); 
+        }
+
+        .purple-page input[type="text"] {
+            border-bottom-color: #4a2a5a;
+letter-spacing: 2px;
+            font-size: clamp(20px, 4.5vw, 24px); 
+        }
+        
+        .purple-page .error {
+            color: #c084fc;
+letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: clamp(16px, 3.5vw, 20px);
+        }
+        /* --- FIM TEMA ROXO --- */
+
+
+        /* --- ESTILOS PAGINA DOURADA (FONTE 'EB Garamond') --- */
+        .golden-page {
+            border: 1px solid rgba(218, 165, 32, 0.2);
+box-shadow: 
+                0 0 50px rgba(218, 165, 32, 0.3),
+                inset 0 0 50px rgba(218, 165, 32, 0.1);
+}
+
+        .golden-page,
+        .golden-page * {
+            font-family: 'EB Garamond', serif !important;
+font-weight: 400 !important;
+        }
+        
+        .golden-page .content,
+        .golden-page .message {
+            font-size: clamp(16px, 3.8vw, 20px);
+line-height: 2;
+            letter-spacing: 0.5px;
+            color: #DAA520; 
+        }
+        
+        .golden-page input[type="text"] {
+             font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+}
+
+        .golden-page .error {
+             font-size: clamp(14px, 3.3vw, 18px);
+color: #FF8C00; 
+        }
+        
+        .hidden-password {
+            color: rgb(10, 10, 10);
+font-family: 'JetBrains Mono', monospace !important; 
+            font-size: 12px !important;
+            font-weight: 400 !important;
+            letter-spacing: 1px !important;
+            user-select: all; 
+            word-break: break-all;
+            line-height: 1;
+text-shadow: none !important;
+        }
+
+        .hidden-password::selection {
+            color: white;
+background: #004080; 
+        }
+        /* --- FIM ESTILOS PAGINA DOURADA --- */
+
+        /* --- ESTILOS PAGINA CINZA (FONTE 'MedievalSharp') --- */
+        .ash-page {
+            border: 1px solid rgba(200, 200, 200, 0.2);
+box-shadow: 
+                0 0 50px rgba(200, 200, 200, 0.2),
+                inset 0 0 50px rgba(200, 200, 200, 0.1);
+}
+
+        .ash-page,
+        .ash-page * {
+            font-family: 'MedievalSharp', serif !important;
+font-weight: 400 !important;
+        }
+        
+        .ash-page .content,
+        .ash-page .message {
+            font-size: clamp(18px, 4vw, 22px);
+line-height: 2;
+            letter-spacing: 1px; 
+            color: #ccc; 
+            transition: opacity 0.5s ease-out;
+}
+        
+        .ash-page input[type="text"] {
+             font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+border-bottom-color: #555;
+        }
+
+        .ash-page input[type="text"]:focus {
+             border-bottom-color: #ccc;
+color: #eee;
+             box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(200, 200, 200, 0.1);
+}
+
+        .ash-page .error {
+             font-size: clamp(16px, 3.5vw, 20px);
+color: #ccc; 
+             text-shadow: 0 0 5px #fff;
+             letter-spacing: 1px;
+        }
+
+        .ash-page .divider {
+            background: linear-gradient(90deg, transparent, #888, transparent);
+transition: opacity 0.5s ease-out; 
+        }
+
+        .ash-page .divider::before {
+            content: '∞';
+color: #ccc;
+            font-size: 14px;
+        }
+
+        #ashImageFinalWrapper, #ashForm, #ashDivider2 {
+            display: none;
+}
+
+        #ashImageFinalWrapper {
+            width: 100%;
+max-width: 300px; 
+            height: auto;
+            margin: clamp(30px, 8vw, 50px) auto; 
+        }
+        /* --- FIM ESTILOS PAGINA CINZA --- */
+
+        /* --- ESTILOS PAGINA VERDE --- */
+        .dwarven-page {
+            border: 1px solid rgba(0, 100, 0, 0.2);
+box-shadow: 
+                0 0 50px rgba(0, 100, 0, 0.2),
+                inset 0 0 50px rgba(0, 100, 0, 0.1);
+}
+
+        .dwarven-page,
+        .dwarven-page * {
+            font-family: 'Uncial Antiqua', cursive !important;
+font-weight: 400 !important;
+        }
+        
+        .dwarven-page .content,
+        .dwarven-page .message {
+            font-size: clamp(16px, 3.8vw, 20px);
+line-height: 2;
+            letter-spacing: 1px; 
+            color: #32CD32; 
+            text-shadow: 0 0 10px rgba(0, 100, 0, 0.5);
+            transition: opacity 0.5s ease-out;
+}
+
+        .dwarven-page .dwarven-form-container {
+            display: flex;
+flex-direction: column;
+            gap: 20px;
+            margin: 20px 0;
+            transition: opacity 0.5s ease-out;
+}
+
+        .dwarven-page select {
+            width: 100%;
+padding: 10px;
+            background: rgba(20, 20, 20, 0.4);
+            border: none;
+            border-bottom: 2px solid #006400; 
+            color: #999;
+            font-size: clamp(14px, 3.5vw, 16px);
+font-family: 'Uncial Antiqua', cursive !important;
+            text-align: center;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+}
+        
+        .dwarven-page select:focus {
+             outline: none;
+border-bottom-color: #32CD32; 
+             background: rgba(30, 30, 30, 0.5);
+             color: #eee;
+        }
+
+        .dwarven-page .error {
+             font-size: clamp(14px, 3.3vw, 18px);
+color: #90EE90; 
+             margin-top: 15px; 
+        }
+
+        .dwarven-page .divider {
+            background: linear-gradient(90deg, transparent, #006400, transparent);
+transition: opacity 0.5s ease-out; 
+        }
+
+        .dwarven-page .divider::before {
+            content: ' rune ';
+color: #32CD32;
+            font-size: 12px;
+        }
+
+        #dwarvenMapWrapper {
+            width: 100%;
+max-width: 400px; 
+            margin: 0 auto;
+            margin-bottom: clamp(30px, 8vw, 50px);
+            transition: opacity 0.5s ease-out;
+}
+        #dwarvenMapWrapper img {
+            width: 100%;
+height: auto;
+            border-radius: 2px;
+            filter: drop-shadow(0 0 15px rgba(0, 100, 0, 0.5));
+}
+        
+        #dwarvenRunesMessage, #dwarvenRunes, #dwarvenRunesForm, #dwarvenDivider2 {
+            display: none;
+}
+        
+        #dwarvenRunes {
+            font-size: clamp(18px, 4vw, 22px);
+color: #32CD32;
+            text-shadow: 0 0 10px rgba(0, 100, 0, 0.5);
+            margin-bottom: clamp(30px, 8vw, 50px);
+            line-height: 2;
+}
+
+        #dwarvenRunesForm {
+            width: 100%;
+max-width: 350px; 
+            margin: 0 auto;
+        }
+        
+        #dwarvenRunesForm input[type="text"] {
+            font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+font-size: clamp(14px, 3.5vw, 16px) !important;
+            letter-spacing: 3px !important;
+            border-bottom-color: #006400;
+            color: #90EE90;
+            text-align: center;
+}
+        #dwarvenRunesForm input[type="text"]:focus {
+            border-bottom-color: #32CD32;
+box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(0, 100, 0, 0.2);
+color: #eee;
+        }
+        /* --- FIM ESTILOS PAGINA VERDE --- */
+
+        /* --- ESTILOS PAGINA AZUL --- */
+        .blue-theme {
+            border: 1px solid rgba(0, 0, 139, 0.2);
+box-shadow: 
+                0 0 50px rgba(0, 0, 139, 0.2),
+                inset 0 0 50px rgba(0, 0, 139, 0.1);
+}
+
+        .blue-theme,
+        .blue-theme * {
+            font-family: 'Fredoka One', cursive !important;
+font-weight: 400 !important;
+            letter-spacing: 0.5px;
+        }
+        
+        .blue-theme .content,
+        .blue-theme .message {
+            font-size: clamp(16px, 3.8vw, 20px);
+line-height: 2;
+            color: #add8e6; /* Azul claro */
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+}
+        
+        .blue-theme .divider {
+            background: linear-gradient(90deg, transparent, #00008b, transparent);
+}
+
+        .blue-theme .divider::before {
+            content: '•';
+color: #add8e6;
+            font-size: 14px;
+        }
+
+        .blue-theme .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(0, 0, 139, 0.5));
+}
+        .blue-theme .symbol-img::before {
+             background: radial-gradient(circle, rgba(0, 0, 139, 0.2) 0%, transparent 70%);
+}
+
+        .doll-image-wrapper {
+            width: 100%;
+max-width: 300px; 
+            margin: clamp(30px, 8vw, 50px) auto;
+            border-radius: 2px;
+            transition: filter 0.3s ease;
+            cursor: default;
+}
+        .doll-image-wrapper img {
+            width: 100%;
+height: auto;
+            border-radius: 2px;
+            filter: drop-shadow(0 0 15px rgba(30, 144, 255, 0.3));
+}
+
+        .blue-theme input[type="text"] {
+             font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+border-bottom-color: #00008b; 
+             color: #add8e6;
+        }
+        .blue-theme input[type="text"]:focus {
+             border-bottom-color: #1e90ff;
+color: #eee;
+             box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(30, 144, 255, 0.2);
+}
+        .blue-theme .error {
+             font-size: clamp(14px, 3.3vw, 18px);
+color: #add8e6; 
+             text-shadow: 0 0 5px #1e90ff;
+             letter-spacing: 1px;
+        }
+        /* --- FIM ESTILOS PAGINA AZUL --- */
+
+        /* --- ESTILOS PAGINA FERRUGEM --- */
+        .rust-page {
+            border: 1px solid rgba(139, 0, 0, 0.2);
+box-shadow: 
+                0 0 50px rgba(139, 0, 0, 0.3),
+                inset 0 0 50px rgba(139, 0, 0, 0.1);
+}
+
+        .rust-page,
+        .rust-page * {
+            font-family: 'Special Elite', 'Courier New', monospace !important;
+font-weight: 400 !important;
+        }
+        
+        .rust-page .content,
+        .rust-page .message {
+            font-size: clamp(16px, 3.8vw, 20px);
+line-height: 2.2;
+            letter-spacing: 1px; 
+            color: #a0522d; /* Sienna (Ferrugem) */
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+}
+        
+        .rust-page input[type="text"] {
+             font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+border-bottom-color: #8b0000; /* Dark Red */
+        }
+
+        .rust-page input[type="text"]:focus {
+             border-bottom-color: #a0522d;
+color: #f4a460; /* Sandy Brown */
+             box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(139, 0, 0, 0.1);
+}
+
+        .rust-page .error {
+             font-size: clamp(14px, 3.3vw, 18px);
+color: #dc143c; /* Crimson */
+             letter-spacing: 1px;
+}
+
+        .rust-page .divider {
+            background: linear-gradient(90deg, transparent, #a0522d, transparent);
+}
+
+        .rust-page .divider::before {
+            content: '~';
+color: #a0522d;
+            font-size: 14px;
+        }
+
+        .rust-page .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(139, 0, 0, 0.5));
+}
+        .rust-page .symbol-img::before {
+             background: radial-gradient(circle, rgba(139, 0, 0, 0.2) 0%, transparent 70%);
+}
+        .rust-page .symbol-text {
+            color: #a0522d;
+text-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+        }
+        
+        /* --- ESTILOS DO RÁDIO (MODIFICADO) --- */
+        .radio-container {
+            width: 100%;
+max-width: 350px;
+            margin: clamp(20px, 5vw, 30px) auto; /* Menos margem */
+            /* O corpo do rádio */
+            background: #2a1a10;
+/* Cor de bakelite mais para o marrom escuro */
+            border: 2px solid #1a0a00;
+border-radius: 6px; /* Mais quadrado */
+            padding: 18px 20px;
+/* Menos padding */
+            box-shadow: 
+                inset 0 2px 8px rgba(0,0,0,0.8), 
+                0 4px 6px rgba(0,0,0,0.5);
+display: grid;
+            /* (MODIFICADO) Adiciona linha para o link */
+            grid-template-areas: 
+                "display speaker"
+                "dial speaker"
+                "link link";
+grid-template-columns: 1fr 100px; /* Display e Speaker */
+            grid-template-rows: auto auto auto;
+/* 3 linhas */
+            gap: 15px;
+/* Espaçamento entre os elementos */
+            align-items: center;
+}
+
+        .radio-display-wrapper {
+            grid-area: display;
+background: #111;
+            border: 1px solid #000;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.6);
+            padding: 8px 10px;
+/* Menos padding */
+            border-radius: 3px;
+/* Mais quadrado */
+            height: 60px;
+/* Altura fixa para o display */
+            display: flex;
+align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .radio-display {
+            font-family: 'Share Tech Mono', monospace !important;
+/* Mais digital */
+            font-size: clamp(18px, 4.5vw, 24px);
+/* Um pouco menor */
+            color: #7FFF00;
+/* Neon verde brilhante */
+            text-shadow: 0 0 8px rgba(127, 255, 0, 0.7), 0 0 4px rgba(127, 255, 0, 0.7);
+transition: text-shadow 0.1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Efeito de estática */
+        .radio-display-wrapper::before {
+            content: '';
+position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+background: 
+                linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px);
+background-size: 2px 2px;
+            animation: staticNoise 0.1s steps(2) infinite;
+            opacity: 0.1;
+/* Opacidade inicial baixa */
+            z-index: 1;
+}
+
+        .radio-speaker {
+            grid-area: speaker;
+height: 100%;
+            background: #1a0a00;
+            border-radius: 4px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.7);
+            padding: 10px;
+}
+        
+        .speaker-grill {
+            height: 100%;
+background: repeating-radial-gradient(circle, #0a0a00, #0a0a00 2px, transparent 3px, transparent 4px);
+        }
+
+        .radio-dial-container {
+            grid-area: dial;
+display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            border-radius: 4px;
+            padding: 10px 0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.7);
+}
+        
+        .radio-dial {
+            -webkit-appearance: none;
+appearance: none;
+            width: 90%;
+            height: 4px; /* Trilha fina */
+            background: #0a0a0a;
+/* Trilha escura */
+            outline: none;
+            opacity: 0.9;
+transition: opacity .2s;
+            cursor: pointer;
+        }
+        .radio-dial:hover {
+            opacity: 1;
+}
+
+        .radio-dial::-webkit-slider-thumb {
+            -webkit-appearance: none;
+appearance: none;
+            width: 24px; /* Maior */
+            height: 24px;
+/* Maior */
+            background: radial-gradient(circle, #d48a3d 0%, #a0522d 100%);
+/* Gradiente de 'latão' ou 'baquelite' */
+            border: 2px solid #111;
+border-radius: 50%; /* Redondo */
+            cursor: pointer;
+box-shadow: 0 0 10px rgba(244, 164, 96, 0.3), 0 2px 2px rgba(0,0,0,0.5);
+            margin-top: -10px;
+/* Centralizar no track */
+        }
+        .radio-dial::-moz-range-thumb {
+            width: 24px;
+height: 24px;
+            background: radial-gradient(circle, #d48a3d 0%, #a0522d 100%);
+            border: 2px solid #111;
+            border-radius: 50%;
+            cursor: pointer;
+box-shadow: 0 0 10px rgba(244, 164, 96, 0.3), 0 2px 2px rgba(0,0,0,0.5);
+}
+        
+        /* (MODIFICADO) O .radio-hint agora é o container PAI dos links */
+        .radio-hint {
+            grid-area: link;
+/* (MODIFICADO) */
+            text-align: center;
+            margin-top: 10px;
+/* (MODIFICADO) */
+            /* display: none;
+Começa controlado pelo JS */
+            /* opacity: 0;
+*/
+            /* transition: opacity 1s ease;
+*/
+            pointer-events: none;
+/* O container não é clicável */
+            /* (NOVO) Estilo para o texto acima do link */
+            font-size: clamp(14px, 3.5vw, 16px);
+color: #a0522d;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+}
+        
+        /* (NOVO) Link da Carta */
+        #letterLinkContainer, #transcriptionLinkContainer {
+            text-align: center;
+display: none; /* Começa escondido */
+            opacity: 0;
+transition: opacity 1s ease;
+            pointer-events: auto; /* Garante que o link seja clicável */
+        }
+        
+        /* (NOVO) Texto acima do link de transcrição */
+        #transcriptionLinkContainer p {
+             margin-bottom: 5px;
+}
+
+        #openLetterLink, #openTranscriptionLink {
+            font-family: 'Special Elite', 'Courier New', monospace !important;
+font-size: clamp(16px, 3.8vw, 20px);
+            color: #a0522d;
+            text-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+            text-decoration: underline;
+            cursor: pointer;
+transition: color 0.3s ease;
+        }
+        #openLetterLink:hover, #openTranscriptionLink:hover {
+            color: #f4a460;
+}
+        
+        /* (NOVO) Estilos do Modal da Carta */
+        .letter-modal-overlay {
+            position: fixed;
+top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1001;
+/* Acima do debugNav */
+            display: none;
+/* Começa escondido */
+            justify-content: center;
+            align-items: center;
+opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 20px;
+        }
+
+        .letter-modal-content {
+            background: rgba(10, 10, 10, 0.95);
+border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 0 0 50px rgba(139, 0, 0, 0.4);
+            padding: clamp(20px, 5vw, 40px);
+max-width: 500px;
+            width: 100%;
+            font-family: 'Special Elite', 'Courier New', monospace !important;
+            color: #a0522d;
+text-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+            /* (NOVO) Permite quebra de linha no texto cifrado */
+            word-wrap: break-word;
+overflow-wrap: break-word;
+        }
+
+        .letter-text {
+            font-size: clamp(16px, 3.8vw, 20px);
+line-height: 2.2;
+            margin-bottom: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+}
+
+        .letter-close-btn {
+            display: block;
+margin: 0 auto;
+            padding: 10px 25px;
+            font-family: 'Special Elite', 'Courier New', monospace !important;
+            font-size: clamp(14px, 3.5vw, 18px);
+background: rgba(20, 20, 20, 0.6);
+            border: 1px solid #8b0000;
+            color: #a0522d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+}
+        .letter-close-btn:hover {
+            background: rgba(30, 30, 30, 0.7);
+color: #f4a460;
+            border-color: #a0522d;
+        }
+        /* --- FIM ESTILOS RÁDIO --- */
+        
+        /* --- FIM ESTILOS PAGINA FERRUGEM --- */
+
+        /* --- ESTILOS TEMA ROSA (ANGELICAL) --- */
+
+        /* Fundo do Body */
+        body.pink-theme::before {
+            background: 
+         
+
+ 
+      radial-gradient(circle at 20% 50%, rgba(219, 39, 119, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(250, 218, 221, 0.06) 0%, transparent 50%);
+/* Padrão de outros temas */
+        }
+
+        /* Partículas */
+        body.pink-theme .particle {
+            background: rgba(219, 39, 119, 0.4);
+box-shadow: 0 0 4px rgba(219, 39, 119, 0.6);
+        /* Padrão de outros temas */
+        }
+
+        /* Container da Página */
+        .pink-page {
+            border: 1px solid rgba(219, 39, 119, 0.2);
+box-shadow: 
+                0 0 50px rgba(219, 39, 119, 0.3),
+                inset 0 0 50px rgba(219, 39, 119, 0.1);
+/* Padrão de outros temas */
+        }
+
+        /* Fonte (Angelical/Divina) */
+        .pink-page,
+        .pink-page * {
+            font-family: 'Cormorant Garamond', serif !important;
+/* Fonte já importada */
+            font-weight: 400 !important;
+/* Padrão de outros temas */
+            letter-spacing: 0.5px;
+}
+
+        /* Textos */
+        .pink-page .content,
+        .pink-page .message {
+            font-size: clamp(18px, 4vw, 22px);
+line-height: 2;
+            letter-spacing: 0.5px;
+            color: #FADADD; /* Rosa claro */
+            text-shadow: 0 0 10px rgba(219, 39, 119, 0.5);
+/* Padrão de outros temas */
+        }
+
+        /* Estilo do Link para a página Rosa */
+        .pink-page a {
+            color: #FADADD;
+/* Mesma cor do texto rosa */
+            text-decoration: underline;
+text-shadow: 0 0 10px rgba(219, 39, 119, 0.5); /* Sombra do texto */
+            transition: color 0.3s ease;
+word-break: break-all; /* Para quebrar o link em telas pequenas */
+        }
+        .pink-page a:hover {
+            color: #fff;
+/* Destaque ao passar o mouse */
+        }
+
+
+        /* Input (voltando para monospace) */
+        .pink-page input[type="text"] {
+            font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+/* Padrão de outros temas */
+            border-bottom-color: #DB2777;
+/* Rosa escuro */
+            color: #FADADD;
+}
+        .pink-page input[type="text"]:focus {
+            border-bottom-color: #FADADD;
+color: #fff;
+            box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(219, 39, 119, 0.2);
+/* Padrão de outros temas */
+        }
+
+        /* Erro */
+        .pink-page .error {
+            font-size: clamp(16px, 3.5vw, 20px);
+color: #FBCFE8; /* Rosa médio */
+            text-shadow: 0 0 5px #DB2777;
+letter-spacing: 1px;
+        }
+
+        /* Divisor */
+        .pink-page .divider {
+            background: linear-gradient(90deg, transparent, #DB2777, transparent);
+/* Padrão de outros temas */
+        }
+        .pink-page .divider::before {
+            content: '♥';
+/* Símbolo de coração */
+            color: #FADADD;
+            font-size: 12px;
+}
+
+        /* Símbolo (Imagem) */
+        .pink-page .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(219, 39, 119, 0.5));
+/* Padrão de outros temas */
+        }
+        .pink-page .symbol-img::before {
+            background: radial-gradient(circle, rgba(219, 39, 119, 0.3) 0%, transparent 70%);
+/* Padrão de outros temas */
+        }
+
+        /* Scrollbar */
+        .pink-page::-webkit-scrollbar-thumb {
+            background: rgba(219, 39, 119, 0.3);
+/* Padrão de outros temas */
+        }
+        /* --- FIM TEMA ROSA --- */
+
+        /* --- (ESTILOS PÁGINA FINAL CORRIGIDOS) --- */
+        .final-override {
+            background: #000 !important;
+/* Fundo totalmente preto */
+            border: none !important;
+/* Sem borda */
+            box-shadow: none !important;
+/* Sem sombra */
+            /* display: flex;
+<-- REMOVIDO para que .main-page  o oculte */
+            flex-direction: column;
+justify-content: center; 
+        }
+
+        .final-override,
+        .final-override .content {
+            font-family: 'Cinzel', serif !important;
+/* Fonte Cinzel */
+            color: #fff !important;
+/* Texto branco */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+/* Um leve brilho para legibilidade */
+            font-size: clamp(18px, 4vw, 22px);
+line-height: 2;
+        }
+        /* --- FIM PÁGINA FINAL --- */
 
         .center {
             text-align: center;
-        }
+}
 
         .symbol-img {
             width: clamp(60px, 20vw, 100px);
-            height: clamp(60px, 20vw, 100px);
+height: clamp(60px, 20vw, 100px);
             margin: 0 auto clamp(30px, 8vw, 50px);
             position: relative;
             filter: drop-shadow(0 0 25px rgba(139, 0, 0, 0.5));
+transition: filter 1s ease, opacity 0.5s ease-out; 
         }
+
+        .purple-page .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(138, 43, 226, 0.5));
+}
+
+        .golden-page .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(218, 165, 32, 0.5));
+}
+        
+        .ash-page .symbol-img {
+             filter: drop-shadow(0 0 25px rgba(200, 200, 200, 0.5));
+}
+
+        .dwarven-page .symbol-img {
+            filter: drop-shadow(0 0 25px rgba(0, 100, 0, 0.5));
+color: #32CD32;
+            text-shadow: 0 0 15px rgba(0, 100, 0, 0.5);
+            transition: opacity 0.5s ease-out;
+}
 
         .symbol-img img {
             width: 100%;
-            height: 100%;
+height: 100%;
             object-fit: contain;
         }
 
         .symbol-img::before {
             content: '';
-            position: absolute;
+position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 120%;
             height: 120%;
-            background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
+background: radial-gradient(circle, rgba(139, 0, 0, 0.3) 0%, transparent 70%);
             animation: pulse 3s ease-in-out infinite;
-        }
+            transition: background 1s ease;
+}
+
+        .purple-page .symbol-img::before {
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.3) 0%, transparent 70%);
+}
+
+        .golden-page .symbol-img::before {
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.3) 0%, transparent 70%);
+}
+
+        .ash-page .symbol-img::before {
+             background: radial-gradient(circle, rgba(200, 200, 200, 0.2) 0%, transparent 70%);
+}
+        
+        .dwarven-page .symbol-img::before {
+             background: radial-gradient(circle, rgba(0, 100, 0, 0.2) 0%, transparent 70%);
+}
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
+            0%, 100% { opacity: 0.5;
+transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.9;
+transform: translate(-50%, -50%) scale(1.1); }
         }
 
         .symbol {
             font-size: clamp(40px, 12vw, 60px);
-            margin-bottom: clamp(30px, 8vw, 50px);
+margin-bottom: clamp(30px, 8vw, 50px);
             opacity: 0.7;
             text-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
             animation: glow 2s ease-in-out infinite;
-        }
+}
 
         .symbol-text {
             font-size: clamp(40px, 12vw, 60px);
-            opacity: 0.7;
+opacity: 0.7;
             text-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
             animation: glow 2s ease-in-out infinite;
             position: relative;
             z-index: 1;
+transition: text-shadow 1s ease, color 1s ease;
+        }
+
+        .purple-page .symbol-text {
+            color: #9370db;
+text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
         }
 
         @keyframes glow {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 0.9; }
+            0%, 100% { opacity: 0.6;
+}
+            50% { opacity: 0.9;
+}
         }
 
         .message {
             font-size: clamp(12px, 3vw, 14px);
-            line-height: 2.4;
+line-height: 2.4;
             margin-bottom: clamp(30px, 8vw, 50px);
             opacity: 0.8;
             letter-spacing: 0.5px;
-        }
-
+}
+        
         input[type="text"] {
             width: 100%;
-            padding: 15px 10px;
+padding: 15px 10px;
             background: rgba(20, 20, 20, 0.4);
             border: none;
             border-bottom: 2px solid #2a2a2a;
             color: #999;
             font-size: clamp(14px, 3.5vw, 16px);
-            font-family: 'JetBrains Mono', 'Consolas', monospace;
+font-family: 'JetBrains Mono', 'Consolas', monospace;
             text-align: center;
             letter-spacing: 3px;
             transition: all 0.4s ease;
-            box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+box-shadow: inset 0 -2px 10px rgba(0, 0, 0, 0.3);
         }
+
+        .golden-page input[type="text"] {
+            border-bottom-color: #8B4513;
+letter-spacing: 2px;
+            font-size: clamp(15px, 3.8vw, 17px);
+            font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+}
 
         input[type="text"]:focus {
             outline: none;
-            border-bottom-color: #4a4a4a;
+border-bottom-color: #4a4a4a;
             background: rgba(30, 30, 30, 0.5);
             color: #ccc;
             box-shadow: 
                 inset 0 -2px 10px rgba(0, 0, 0, 0.3),
                 0 0 20px rgba(139, 0, 0, 0.1);
+}
+
+        .purple-page input[type="text"]:focus {
+            border-bottom-color: #8a2be2;
+box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(138, 43, 226, 0.2);
+color: #a78bfa;
+        }
+
+        .golden-page input[type="text"]:focus {
+            border-bottom-color: #DAA520;
+box-shadow: 
+                inset 0 -2px 10px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(218, 165, 32, 0.2);
+color: #F0E68C; 
         }
 
         input[type="text"]::placeholder {
             color: #333;
-            letter-spacing: 3px;
+letter-spacing: 3px;
             opacity: 0;
         }
 
         .error {
             font-size: clamp(11px, 2.5vw, 12px);
-            margin-top: 25px;
+margin-top: 25px;
             opacity: 0;
             transition: opacity 0.4s ease;
-            color: #8b0000;
+            color: #8b0000; 
             letter-spacing: 1px;
-        }
+}
 
         .error.show {
             opacity: 0.8;
-            animation: shake 0.5s ease;
+animation: shake 0.5s ease;
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+            0%, 100% { transform: translateX(0);
+}
+            25% { transform: translateX(-5px);
+}
+            75% { transform: translateX(5px);
+}
         }
 
         .hint {
             font-size: clamp(10px, 2.5vw, 11px);
-            margin-top: clamp(40px, 10vw, 70px);
+margin-top: clamp(40px, 10vw, 70px);
             opacity: 0.4;
             letter-spacing: 1px;
             font-style: italic;
-        }
+}
 
         .content {
             font-size: clamp(12px, 3vw, 14px);
-            line-height: 2.4;
+line-height: 2.4;
             margin-bottom: clamp(30px, 6vw, 40px);
             opacity: 0.8;
             letter-spacing: 0.5px;
-        }
+}
 
         .divider {
             width: clamp(40px, 15vw, 60px);
-            height: 2px;
+height: 2px;
             background: linear-gradient(90deg, transparent, #333, transparent);
             margin: clamp(30px, 8vw, 50px) auto;
             position: relative;
-        }
+            transition: background 1s ease;
+}
+
+        .purple-page .divider {
+            background: linear-gradient(90deg, transparent, #8a2be2, transparent);
+}
+
+        .golden-page .divider {
+            background: linear-gradient(90deg, transparent, #DAA520, transparent);
+}
 
         .divider::before {
             content: '◆';
-            position: absolute;
+position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             color: #333;
             font-size: 8px;
+            transition: color 1s ease;
+}
+
+        .purple-page .divider::before {
+            content: '▪';
+color: #a78bfa;
+            font-size: 12px;
+        }
+
+        .golden-page .divider::before {
+            content: '❖';
+color: #DAA520;
+            font-size: 12px;
         }
 
         .code {
             font-size: clamp(11px, 2.5vw, 12px);
-            opacity: 0.6;
+opacity: 0.6;
             letter-spacing: 2px;
             margin: clamp(20px, 5vw, 30px) 0;
             padding: clamp(15px, 4vw, 20px);
             background: rgba(0, 0, 0, 0.3);
-            border-left: 2px solid #333;
+border-left: 2px solid #333;
+            transition: border-color 1s ease;
+        }
+
+        .purple-page .code {
+            border-left-color: #8a2be2;
+color: #a78bfa;
         }
 
         .fade-in {
             animation: fadeIn 2s ease-in;
-        }
+}
+        
+        .fade-out {
+            animation: fadeOut 1.5s ease-out forwards;
+}
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0;
+transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0);
+}
         }
+
+        @keyframes fadeOut {
+            from { opacity: 1;
+transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px);
+display: none; }
+        }
+
 
         #primaryPage {
             display: flex;
-        }
+}
 
         .question {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(32px, 8vw, 56px);
-            font-weight: 600;
+            font-family: 'Special Elite', 'Courier New', monospace;
+font-size: clamp(28px, 7vw, 48px); 
+            font-weight: 400; 
             color: #8b0000;
             text-shadow: 
                 0 0 20px rgba(139, 0, 0, 0.8),
                 0 0 40px rgba(139, 0, 0, 0.5),
                 0 0 60px rgba(139, 0, 0, 0.3);
-            margin-bottom: clamp(60px, 8vh, 100px);
-            letter-spacing: 4px;
+margin-bottom: clamp(60px, 8vh, 100px);
+            letter-spacing: 2px; 
             animation: creepyGlow 3s ease-in-out infinite;
-            line-height: 1.3;
+            line-height: 1.4; 
             text-align: center;
             padding: 0 20px;
-        }
+}
 
         @keyframes creepyGlow {
             0%, 100% { 
                 opacity: 0.7;
-                text-shadow: 
+text-shadow: 
                     0 0 20px rgba(139, 0, 0, 0.8),
                     0 0 40px rgba(139, 0, 0, 0.5),
                     0 0 60px rgba(139, 0, 0, 0.3);
-            }
+}
             50% { 
                 opacity: 1;
-                text-shadow: 
+text-shadow: 
                     0 0 30px rgba(139, 0, 0, 1),
                     0 0 60px rgba(139, 0, 0, 0.8),
                     0 0 90px rgba(139, 0, 0, 0.6);
-            }
+}
+        }
+        
+        @keyframes staticNoise {
+            0% { transform: translate(0,0);
+}
+            25% { transform: translate(-2px, 2px);
+}
+            50% { transform: translate(2px, -2px);
+}
+            75% { transform: translate(2px, 2px);
+}
+            100% { transform: translate(-2px, -2px);
+}
         }
 
         .buttons-container {
             display: flex;
-            justify-content: center;
+justify-content: center;
             gap: clamp(30px, 8vw, 60px);
             margin-bottom: clamp(40px, 6vh, 60px);
-        }
+}
 
         .choice-btn {
             width: clamp(120px, 30vw, 180px);
-            height: clamp(50px, 12vw, 70px);
+height: clamp(50px, 12vw, 70px);
             border-radius: 2px;
             background: rgba(20, 20, 20, 0.6);
             border: 2px solid #2a2a2a;
             color: #555;
-            font-size: clamp(20px, 5vw, 28px);
+font-size: clamp(20px, 5vw, 28px);
             cursor: pointer;
             transition: all 0.4s ease;
             display: flex;
@@ -340,170 +1413,262 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            letter-spacing: 2px;
+letter-spacing: 2px;
         }
 
         .choice-btn::before {
             content: '';
-            position: absolute;
+position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 100%;
             transition: all 0.4s ease;
-        }
+}
 
         .choice-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
+box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
         }
 
         .yes-btn {
             border-color: #1a4d1a;
-        }
+}
 
         .yes-btn:hover {
             border-color: #2d7d2d;
-            color: #4a4;
+color: #4a4;
             box-shadow: 0 0 30px rgba(45, 125, 45, 0.4);
-        }
+}
 
         .yes-btn:hover::before {
             width: 100%;
-            background: rgba(45, 125, 45, 0.1);
+background: rgba(45, 125, 45, 0.1);
         }
 
         .no-btn {
             border-color: #4d1a1a;
-        }
+}
 
         .no-btn:hover {
             border-color: #7d2d2d;
-            color: #a44;
+color: #a44;
             box-shadow: 0 0 30px rgba(125, 45, 45, 0.4);
-        }
+}
 
         .no-btn:hover::before {
             width: 100%;
-            background: rgba(125, 45, 45, 0.1);
+background: rgba(125, 45, 45, 0.1);
         }
 
         .btn-icon {
             position: relative;
-            z-index: 1;
+z-index: 1;
             font-weight: bold;
         }
 
         .warning-text {
             font-size: clamp(14px, 3.5vw, 18px);
-            color: #8b0000;
+color: #8b0000;
             opacity: 0;
             transition: opacity 0.6s ease;
             letter-spacing: 3px;
             text-shadow: 0 0 10px rgba(139, 0, 0, 0.6);
             font-style: italic;
-            text-align: center;
+text-align: center;
             padding: 0 20px;
-        }
+            font-family: 'Special Elite', 'Courier New', monospace;
+}
 
         .warning-text.show {
             opacity: 0.9;
-            animation: warningPulse 2s ease-in-out infinite;
+animation: warningPulse 2s ease-in-out infinite;
         }
 
         @keyframes warningPulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.7;
+}
+            50% { opacity: 1;
+}
         }
 
         .choice-btn.hidden {
             opacity: 0;
-            transform: scale(0);
+transform: scale(0);
             pointer-events: none;
         }
 
         .particles {
             position: fixed;
-            top: 0;
+top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 0;
-        }
+}
 
         .particle {
             position: absolute;
-            width: 2px;
+width: 2px;
             height: 2px;
             background: rgba(139, 0, 0, 0.4);
             border-radius: 50%;
             animation: float linear infinite;
-            box-shadow: 0 0 4px rgba(139, 0, 0, 0.6);
+box-shadow: 0 0 4px rgba(139, 0, 0, 0.6);
+            transition: background 1s ease, box-shadow 1s ease;
+}
+
+        body.purple-theme .particle {
+            background: rgba(138, 43, 226, 0.4);
+box-shadow: 0 0 4px rgba(138, 43, 226, 0.6);
+        }
+
+        body.golden-theme .particle {
+            background: rgba(218, 165, 32, 0.4);
+box-shadow: 0 0 4px rgba(218, 165, 32, 0.6);
+        }
+
+        body.ash-theme .particle {
+            background: rgba(200, 200, 200, 0.4);
+box-shadow: 0 0 4px rgba(200, 200,200, 0.6);
+        }
+        
+        body.dwarven-theme .particle {
+            background: rgba(0, 100, 0, 0.4);
+box-shadow: 0 0 4px rgba(0, 100, 0, 0.6);
+        }
+
+        body.blue-theme .particle {
+            background: rgba(0, 0, 139, 0.4);
+box-shadow: 0 0 4px rgba(0, 0, 139, 0.6);
+        }
+        
+        body.rust-theme .particle {
+            background: rgba(165, 42, 42, 0.4);
+box-shadow: 0 0 4px rgba(139, 0, 0, 0.6);
+        }
+
+        /* Partículas Rosas */
+        body.pink-theme .particle {
+            background: rgba(219, 39, 119, 0.4);
+box-shadow: 0 0 4px rgba(219, 39, 119, 0.6);
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            5% { opacity: 0.8; }
-            95% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(100vh) rotate(0deg);
+opacity: 0; }
+            5% { opacity: 0.8;
+}
+            95% { opacity: 0.8;
+}
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;
+}
         }
 
         @media (max-width: 480px) {
             body {
                 padding: 5px;
-            }
+}
             
             .container {
                 max-width: 100%;
-            }
+}
 
             input[type="text"] {
                 letter-spacing: 2px;
-            }
+}
+            
+            .radio-container {
+                grid-template-areas: 
+                    "display display"
+                    "dial speaker"
+                
+
+
+
+    "link link"; /* (MODIFICADO) */
+                grid-template-columns: 1fr 100px;
+}
         }
 
         @media (max-height: 600px) {
             .login-page, .main-page {
                 padding: 20px 15px;
-            }
+}
 
             .message, .content {
                 line-height: 2;
-                margin-bottom: 20px;
+margin-bottom: 20px;
             }
 
             .symbol-img {
                 margin-bottom: 20px;
-            }
+}
 
             .hint {
                 margin-top: 30px;
-            }
+}
         }
 
         .login-page::-webkit-scrollbar,
         .main-page::-webkit-scrollbar {
             width: 6px;
-        }
+}
 
         .login-page::-webkit-scrollbar-track,
         .main-page::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.2);
-        }
+}
 
         .login-page::-webkit-scrollbar-thumb,
         .main-page::-webkit-scrollbar-thumb {
             background: rgba(139, 0, 0, 0.3);
-            border-radius: 3px;
+border-radius: 3px;
         }
+
+        .purple-page::-webkit-scrollbar-thumb {
+            background: rgba(138, 43, 226, 0.3);
+}
+
+        .golden-page::-webkit-scrollbar-thumb {
+            background: rgba(218, 165, 32, 0.3);
+}
+        
+        .ash-page::-webkit-scrollbar-thumb {
+            background: rgba(200, 200, 200, 0.3);
+}
+
+        .dwarven-page::-webkit-scrollbar-thumb {
+            background: rgba(0, 100, 0, 0.3);
+}
+        
+        .blue-theme::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 139, 0.3);
+}
+        
+        .rust-page::-webkit-scrollbar-thumb {
+            background: rgba(165, 42, 42, 0.3);
+}
+
+        /* Scrollbar Rosa */
+        .pink-page::-webkit-scrollbar-thumb {
+            background: rgba(219, 39, 119, 0.3);
+}
+        
     </style>
+    
+
 </head>
 <body>
+    
+    <div id="fogOverlay"></div> 
     
     <audio id="bgMusic" loop preload="auto">
         <source src="https://github.com/oMikaelito/FATUMFILUM/raw/main/Verdadeira-Arte-A-Noiva-Fantasma.mp3" type="audio/mpeg">
     </audio>
+    <audio id="radioStaticAudio" loop preload="auto" src="https://github.com/oMikaelito/FATUMFILUM/raw/main/radio.mp3"></audio>
+
     
     <div class="particles" id="particles"></div>
     
@@ -511,316 +1676,1677 @@
         <div class="question fade-in">você tem certeza disso?</div>
         
         <div class="buttons-container fade-in">
-            <button id="yesBtn" class="choice-btn yes-btn" onclick="acceptChallenge()">
+  
+
+
+
+          <button id="yesBtn" class="choice-btn yes-btn" onclick="acceptChallenge()">
                 <span class="btn-icon">✓</span>
             </button>
             <button id="noBtn" class="choice-btn no-btn" onclick="rejectChallenge()">
                 <span class="btn-icon">✕</span>
             </button>
         </div>
-        
-        <div id="warningMsg" class="warning-text">você não 
-            tem escolha</div>
+    
+
+
+
+    
+        <div id="warningMsg" class="warning-text">você não tem escolha</div>
     </div>
     
     <div class="container">
       
-        <div id="loginPage" class="login-page center">
-            <div class="symbol-img">
+        <div id="loginPage" class="login-page center red-theme-page">
+            <div class="symbol-img fade-in"> 
                 <img src="https://i.imgur.com/lbX9hAN.jpg" alt="símbolo">
             </div>
-            
-            <div class="message">
-                tudo começa por ele<br>
+       
+
+
+
+     
+            <div class="content fade-in">
+                tudo começa pelo sangue<br>
                 o princípio de todas as coisas<br>
-                procure onde a história inicia
+                as emoções são tudo<br>
+                o odio pode lhe cegar
+  
+
+
+
+          </div>
+
+            <div class="divider fade-in"></div> 
+
+            <div class="message fade-in">
+                ⠨⠨⠥⠍_⠏⠁⠉⠞⠕
             </div>
 
-            <form id="loginForm">
+            <form id="loginForm"> 
                 <input 
-                    type="text" 
+  
+
+
+
+                  type="text" 
                     id="password" 
                     placeholder="" 
                     required 
-                    autocomplete="off"
+                  
+
+
+
+  autocomplete="off"
                 >
                 <div id="errorMsg" class="error">não é isso</div>
             </form>
 
-            <div class="hint">ele está no começo</div>
+            <div class="divider fade-in"></div> 
         </div>
-
-        <div id="mainPage" class="main-page center">
-            
+        <div id="purplePage" class="main-page purple-page center">
             <div class="symbol-img fade-in">
-                <div class="symbol-text">◉</div>
+ 
+
+
+
+               <img src="https://i.imgur.com/afuWqgt.png" alt="símbolo roxo">
             </div>
             
             <div class="content fade-in">
-                você encontrou<br>
+                H4H4H4H4H4H4H4<br>
                 <br>
-                mas a jornada<br>
-                apenas começou<br>
-                <br>
-                outra porta se revela<br>
-                outra chave é necessária
-            </div>
+            
+
+
+
+    A EN3RG14, O C4O5 É IN3VITAVEL!
+</div>
 
             <div class="divider fade-in"></div>
 
-            <div class="message">
-                o que corre nas veias<br>
-                o que nos mantém vivos
+            <div class="message fade-in">
+                4 3N3RG14 N4O POD3 53R CONT1D4 4QU1<br>
+                BU5QU3 4 5U4 V3RD4D31R4 OR1G3M
             </div>
 
-            <form id="secondForm">
-                <input 
+            <form id="purpleForm">
+     
+
+
+
+           <input 
                     type="text" 
-                    id="secondPassword" 
+                    id="purplePassword" 
                     placeholder="" 
                     required 
-                    autocomplete="off"
+    
+
+
+
+                autocomplete="off"
                 >
-                <div id="errorMsg2" class="error">não é isso</div>
+                <div id="errorMsg3" class="error">NÃO É ISSO</div>
             </form>
 
             <div class="divider fade-in"></div>
         </div>
 
-        <div id="finalPage" class="main-page center">
-            <div class="symbol-img fade-in">
-                <div class="symbol-text">◉</div>
+        <div id="goldenPage" class="main-page golden-page center">
+  
+
+
+
+          <div class="symbol-img fade-in">
+                <img src="https://i.imgur.com/Le1Gzd6.png" alt="símbolo dourado">
             </div>
             
             <div class="content fade-in">
-                você encontrou<br>
-                <br>
-                este lugar existe entre<br>
-                o que foi dito<br>
-                e o que foi silenciado<br>
-                <br>
-                alguns chamam de portal<br>
-                outros de arquivo<br>
-                você pode chamar de lar
+                Conhecimento é poder
+            </div>
+
+ 
+
+
+
+           <div class="divider fade-in"></div>
+
+            <div class="message fade-in">
+                O equilibrio deve-se ser mantido<br>
+                Escute os sussuros<br>
+                Use a percepção do outro lado
+            </div>
+
+  
+
+
+
+          <form id="goldenForm">
+                <input 
+                    type="text" 
+                    id="goldenPassword" 
+                    placeholder="" 
+         
+
+
+
+           required 
+                    autocomplete="off"
+                >
+                <div id="errorMsgGolden" class="error">não é isso</div>
+            </form>
+
+            <div class="divider fade-in"></div>
+      
+
+
+
+      
+            <div class="hidden-password fade-in">saber_tudo_é_perder_tudo</div>
+        </div>
+        <div id="ashPage" class="main-page ash-page center">
+            
+            <div class="symbol-img fade-in">
+                <img src="https://i.imgur.com/ktKgkA7.png" alt="símbolo cinza">
+            </div>
+   
+
+
+
+         
+            <div id="ashContent" class="content fade-in">
+                A entidade do tempo<br>
+                A distorção da percepção
+            </div>
+
+            <div id="ashDivider1" class="divider fade-in"></div>
+           
+
+
+
+ 
+            <div id="ashMessage" class="message fade-in">
+                Todas as histórias tem um fim<br>
+                Quanto tempo ainda lhe resta?<br>
+                tick tack...
+            </div>
+
+            <div id="ashImageFinalWrapper" 
+
+
+
+class="symbol-img">
+                <img id="ashImageFinal" src="https://i.imgur.com/TGyr5rD.png" alt="símbolo berço">
+            </div>
+
+            <div id="ashDivider2" class="divider"></div>
+            
+            <form id="ashForm">
+                <input 
+            
+
+
+
+        type="text" 
+                    id="ashPassword" 
+                    placeholder="" 
+                    required 
+                    autocomplete="off"
+        
+
+
+
+        >
+                <div id="errorMsgAsh" class="error">não é isso</div>
+            </form>
+
+        </div>
+        <div id="dwarvenPage" class="main-page dwarven-page center">
+            
+            <div id="dwarvenSymbol" class="symbol-img fade-in">
+             
+
+
+
+   <img src="https://i.imgur.com/CigTxx0.png" alt="símbolo runas verde">
+            </div>
+
+            <div id="dwarvenMapWrapper" class="fade-in">
+                <img src="https://i.imgur.com/RPQIvSv.png" alt="mapa">
+            </div>
+            
+            <div id="dwarvenMessage" class="message fade-in">
+          
+
+
+
+      "A última luz do dia de 
+                Durin é necessario"
+            </div>
+
+            <div id="dwarvenDivider1" class="divider fade-in"></div>
+
+            <form id="dwarvenForm" class="dwarven-form-container fade-in">
+                <select id="dwarvenSeason">
+           
+
+
+
+         <option value="" selected disabled>-- Estação --</option>
+                    <option value="primavera">Primavera</option>
+                    <option value="verao">Verão</option>
+                    <option value="outono">Outono</option>
+                    <option value="inverno">Inverno</option>
+  
+
+
+
+              </select>
+                
+                <select id="dwarvenSun">
+                    <option value="" selected disabled>-- Sol --</option>
+                    <option value="nascente">Nascente</option>
+       
+
+
+
+             <option value="meio-dia">Meio-dia</option>
+                    <option value="poente">Poente</option>
+                    <option value="noite">Noite</option>
+                </select>
+
+                <select id="dwarvenMoon">
+           
+
+
+
+         <option value="" selected disabled>-- Lua --</option>
+                    <option value="🌕">🌕 Cheia</option>
+                    <option value="🌖">🌖 Minguante Gibosa</option>
+                    <option value="🌗">🌗 Quarto Minguante</option>
+                  
+
+
+
+  <option value="🌘">🌘 Minguante Crescente</option>
+                    <option value="🌑">🌑 Nova</option>
+                    <option value="🌒">🌒 Crescente Nova</option>
+                    <option value="🌓">🌓 Quarto Crescente</option>
+                    <option value="🌔">🌔 Crescente Gibosa</option>
+    
+
+
+
+            </select>
+
+                
+                <div id="errorMsgDwarven" class="error">As estrelas não estão alinhadas</div>
+            </form>
+
+            <div id="dwarvenRunesMessage" class="message">
+                A resposta sempre esteve no primeiro dia da 
+
+
+
+última lua do outono no limiar do inverno
+            </div>
+            
+            <div id="dwarvenRunes" class="message">
+                ᚨᛚᛖᛗ ᛞᚨ ᛗ៟ᚾᛏᚨᚾᚺᚨ
+            </div>
+
+            <form id="dwarvenRunesForm">
+            
+
+
+
+    <input 
+                    type="text" 
+                    id="dwarvenRunesPassword" 
+                    placeholder="" 
+                    required 
+           
+
+
+
+         autocomplete="off"
+                >
+                <div id="errorMsgDwarvenRunes" class="error">não é isso</div>
+            </form>
+            
+        </div>
+        <div id="dollPage" class="main-page blue-theme center">
+           
+
+
+
+ <div class="symbol-img fade-in">
+                <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/olho.png" alt="olho">
+            </div>
+            
+            <div class="content fade-in">
+                Uma simples boneca...<br>
+                Quais são os seus segredos?
+</div>
+
+            <div class="divider fade-in"></div>
+
+            <div class="message fade-in">
+                Há alguma forma de olhar dentro dela?<br>
+                Uma forma de ver seus pensamentos...?
+</div>
+
+            <div id="dollImageWrapper" class="doll-image-wrapper fade-in">
+                <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/boneca.jpg" alt="boneca">
+            </div>
+
+            <form id="dollForm" class="fade-in">
+                <input 
+                    type="text" 
+   
+
+
+
+                 id="dollPassword" 
+                    placeholder="" 
+                    required 
+                    autocomplete="off"
+                >
+    
+
+
+
+            <div id="errorMsgDoll" class="error">não é isso</div>
+            </form>
+
+            <div class="divider fade-in"></div>
+        </div>
+        
+        <div id="rustPage" class="main-page rust-page center">
+            
+            <div class="symbol-img fade-in">
+    
+
+
+             <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/CCXZjZu.png" alt="Símbolo Ferrugem">
+            </div>
+            
+            <div class="content fade-in">
+                O ar está pesado.<br>
+                Cheira a metal velho e... algo mais.<br><br>
+     
+
+
+   
+        O rádio dizia algo como "data importante"<br>
+                Procure a frequencia correta.
+</div>
+
+            <div class="radio-container fade-in">
+                
+                <div class="radio-display-wrapper">
+                    <div id="radioDisplay" class="radio-display">1500 MHz</div>
+                </div>
+              
+
+
+
+  
+                <div class="radio-speaker">
+                    <div class="speaker-grill"></div>
+                </div>
+                
+                <div class="radio-dial-container">
+           
+
+
+
+         <input type="range" id="radioDial" class="radio-dial" min="1000" max="2000" value="1500">
+                </div>
+                
+                <div class="radio-hint" id="linkContainer"> 
+                    <div id="letterLinkContainer">
+             
+
+
+
+           <a href="#" id="openLetterLink">carta.txt</a>
+                    </div>
+                    <div id="transcriptionLinkContainer">
+                        <p>As letras marcham em ordem</p>
+                  
+
+
+
+      <a href="#" id="openTranscriptionLink">transcrição_radio+13</a>
+                        <p>Procure aquilo que se repete</p>
+                    </div>
+                </div>
+            </div>
+            
+    
+
+
+
+        <form id="rustForm" class="fade-in">
+                <input 
+                    type="text" 
+                    id="rustPassword" 
+                    placeholder="" 
+          
+
+
+
+          required 
+                    autocomplete="off"
+                >
+                <div id="errorMsgRust" class="error">...</div>
+            </form>
+
+            <div class="divider fade-in"></div>
+
+         
+
+
+
+   <div id="letterModal" class="letter-modal-overlay">
+                <div class="letter-modal-content">
+                    <div class="letter-text">
+                        O rádio costumava avisar sobre eles,<br>
+                        Mas agora só emite 
+
+
+
+sussurros...
+                        <br><br>
+                        As vozes na estática falam em círculos.<br>
+                        Sempre voltando... sempre girando...
+                   
+
+
+
+     <br><br>
+                        Elas... elas sempre repetem o número 1073...<br>
+                        Talvez isso signifique algo...<br>
+                        <br><br>
+              
+
+
+
+      </div>
+                    <button id="closeLetterButton" class="letter-close-btn">Fechar</button>
+                </div>
+            </div>
+
+            <div id="transcriptionModal" class="letter-modal-overlay">
+                <div class="letter-modal-content">
+             
+
+
+
+       <div class="letter-text">
+                        RH SVM VFFB... RH ZNGRV RYN... RH FBH B ZBAFGEB AB SVZ
+                        RH AÃB PBAFRTHVN NPRVGN-YN QNDHRYR WRVGB...
+                        CBEDHR RH SVM VFFB?
+É CBE VFFB DHR ZR ZNAQNENZ NDHV?
+                        CNEN FBSERE NF PBAFRDHRAPVNF QR ZNGN-YN?
+<br><br>
+                        RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB 
+
+
+
+SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ RH ZRFZB FBH B ZBAFGEB AB SVZ
+                    </div>
+                    <button id="closeTranscriptionButton" class="letter-close-btn">Fechar</button>
+                </div>
+            </div>
+
+        </div>
+
+ 
+
+
+        <div id="pinkPage" class="main-page pink-page center">
+            <div class="symbol-img fade-in">
+                <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/sleep.png" alt="símbolo anjo dormindo">
+            </div>
+
+            <div class="content fade-in">
+                Procure a resposta no Eden.
+</div>
+
+            <div class="divider fade-in"></div>
+
+            <div class="doll-image-wrapper fade-in">
+                <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/image.png" alt="imagem eden">
+            </div>
+
+            <div class="message fade-in">
+                Busque pelo titulo.
+</div>
+
+            <form id="pinkForm">
+                <input
+                    type="text"
+                    id="pinkPassword"
+                    placeholder=""
+           
+
+         required
+                    autocomplete="off"
+                >
+                <div id="errorMsgPink" class="error">...não é isso...</div>
+            </form>
+
+            <div class="divider fade-in"></div>
+        </div>
+
+ 
+       <div id="pinkPage2" class="main-page pink-page center">
+            <div class="symbol-img fade-in">
+                <img src="https://github.com/oMikaelito/FATUMFILUM/raw/main/sleep.png" alt="símbolo anjo dormindo">
+            </div>
+
+            <div class="content fade-in">
+                O Eden é mesmo o final?
+ou não ?
             </div>
 
             <div class="divider fade-in"></div>
 
-            <div class="code fade-in">
-                fragmento_001.txt<br>
-                status: decodificado<br>
-                próximo: ?
+            <div class="message fade-in">
+                <a href="https://github.com/oMikaelito/FATUMFILUM/raw/main/.rar" target="_blank" rel="noopener noreferrer">
+                    https://github.com/oMikaelito/FATUMFILUM/raw/main/.rar
+                </a>
             </div>
 
+ 
+           <div class="message fade-in">
+                Sempre há um novo paraiso, procure por ele.
+</div>
+
+            <div class="message fade-in">
+                A chave esta nele, o que vem após o Eden.
+</div>
+
+            <form id="pinkForm2">
+                <input
+                    type="text"
+                    id="pinkPassword2"
+                    placeholder=""
+           
+         required
+                    autocomplete="off"
+                >
+                <div id="errorMsgPink2" class="error">...não é isso...</div>
+            </form>
+
             <div class="divider fade-in"></div>
+        </div>
+
+ 
+
+        <div id="finalPage" class="main-page center final-override">
+            <div class="content fade-in">
+                Parabens, voce se provou o suficiente.
+<br><br>
+                Volte aonde tudo começou, a porta esta aberta.
+</div>
         </div>
     </div>
 
     <script>
-        // --- LÓGICA DE ÁUDIO ATUALIZADA (Web Audio API) ---
-        let audioCtx;
+        // Pré-carrega a fonte antes de iniciar
+        document.fonts.ready.then(function() {
+            console.log('Fontes carregadas com sucesso');
+        });
+let audioCtx;
         let audioBuffer;
         let sourceNode;
-        // Pega a URL de áudio diretamente da tag <audio>
+        let mainGainNode; // (MODIFICADO) Nó de ganho principal
         const audioUrl = document.getElementById('bgMusic').src;
-        // --- FIM DA ATUALIZAÇÃO ---
-
-        const bgMusicPlayer = document.getElementById('bgMusic');
+const bgMusicPlayer = document.getElementById('bgMusic');
         let musicStarted = false;
+        
+        // (NOVO) Áudio de Estática
+        const radioStaticAudio = document.getElementById('radioStaticAudio');
+let staticAudioStarted = false;
 
-        // Criar partículas
         const particlesContainer = document.getElementById('particles');
         const isMobile = window.innerWidth < 768;
-        const particleCount = isMobile ? 40 : 80;
+        const particleCount = isMobile ?
+40 : 80;
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
-            particle.className = 'particle';
+particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
-            particle.style.animationDelay = -(Math.random() * 25) + 's';
+particle.style.animationDelay = -(Math.random() * 25) + 's';
             const size = Math.random() * 2 + 1;
             particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
+particle.style.height = size + 'px';
             particlesContainer.appendChild(particle);
         }
 
-        const correctPassword = "sangue";
-        const secondCorrectPassword = "123";
-        const loginForm = document.getElementById('loginForm');
+        const correctPassword = "um_pacto";
+const purpleCorrectPassword = "0413";
+        const goldenCorrectPassword = "saber_tudo_é_perder_tudo";
+        const ashCorrectPassword = "santo berço"; 
+        
+        const dwarvenSeason = "outono";
+const dwarvenSun = "poente";
+        const dwarvenMoon = "🌒"; 
+        const dwarvenRunePassword = "alem da montanha"; 
+        
+        const dollCorrectPassword = "suas_infelizes_vidas";
+const rustCorrectPassword = "EU MESMO SOU O MONSTRO NO FIM";
+/* (SENHA ROSA ATUALIZADA) */
+        const pinkCorrectPassword = "telomeres";
+/* (SENHA ROSA 2 ATUALIZADA) */
+        const pinkCorrectPassword2 = "have you been waiting long for me?";
+console.log("%c🔮 O QU3 M4I5 S3R1A? 0413", "color: #8a2be2; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #8a2be2;");
+const loginForm = document.getElementById('loginForm');
         const passwordInput = document.getElementById('password');
         const errorMsg = document.getElementById('errorMsg');
         const primaryPage = document.getElementById('primaryPage');
         const loginPage = document.getElementById('loginPage');
-        const mainPage = document.getElementById('mainPage');
-        const finalPage = document.getElementById('finalPage');
-        const secondForm = document.getElementById('secondForm');
-        const secondPasswordInput = document.getElementById('secondPassword');
-        const errorMsg2 = document.getElementById('errorMsg2');
+const purplePage = document.getElementById('purplePage');
+        const purpleForm = document.getElementById('purpleForm');
+        const purplePasswordInput = document.getElementById('purplePassword');
+        const errorMsg3 = document.getElementById('errorMsg3');
 
-        // --- NOVA FUNÇÃO DE ÁUDIO (Web Audio API) ---
+        const goldenPage = document.getElementById('goldenPage');
+const goldenForm = document.getElementById('goldenForm');
+        const goldenPasswordInput = document.getElementById('goldenPassword');
+        const errorMsgGolden = document.getElementById('errorMsgGolden');
+
+        const ashPage = document.getElementById('ashPage');
+        const ashForm = document.getElementById('ashForm');
+const ashPasswordInput = document.getElementById('ashPassword');
+        const errorMsgAsh = document.getElementById('errorMsgAsh');
+        
+        const dwarvenPage = document.getElementById('dwarvenPage');
+        const dwarvenSymbol = document.getElementById('dwarvenSymbol');
+        const dwarvenMapWrapper = document.getElementById('dwarvenMapWrapper');
+const dwarvenMessage = document.getElementById('dwarvenMessage');
+        const dwarvenDivider1 = document.getElementById('dwarvenDivider1');
+        const dwarvenForm = document.getElementById('dwarvenForm'); 
+        const dwarvenSeasonSelect = document.getElementById('dwarvenSeason');
+        const dwarvenSunSelect = document.getElementById('dwarvenSun');
+const dwarvenMoonSelect = document.getElementById('dwarvenMoon');
+        const errorMsgDwarven = document.getElementById('errorMsgDwarven');
+        
+        const dwarvenRunesMessage = document.getElementById('dwarvenRunesMessage');
+        const dwarvenRunes = document.getElementById('dwarvenRunes');
+        const dwarvenRunesForm = document.getElementById('dwarvenRunesForm');
+const dwarvenRunesPasswordInput = document.getElementById('dwarvenRunesPassword');
+        const errorMsgDwarvenRunes = document.getElementById('errorMsgDwarvenRunes');
+
+        const dollPage = document.getElementById('dollPage');
+        const dollForm = document.getElementById('dollForm');
+        const dollPasswordInput = document.getElementById('dollPassword');
+const errorMsgDoll = document.getElementById('errorMsgDoll');
+
+        const rustPage = document.getElementById('rustPage');
+        const rustForm = document.getElementById('rustForm');
+        const rustPasswordInput = document.getElementById('rustPassword');
+        const errorMsgRust = document.getElementById('errorMsgRust');
+const finalPage = document.getElementById('finalPage');
+
+        /* (NOVOS ELEMENTOS ROSA) */
+        const pinkPage = document.getElementById('pinkPage');
+const pinkForm = document.getElementById('pinkForm');
+        const pinkPasswordInput = document.getElementById('pinkPassword');
+        const errorMsgPink = document.getElementById('errorMsgPink');
+/* (NOVOS ELEMENTOS ROSA 2) */
+        const pinkPage2 = document.getElementById('pinkPage2');
+const pinkForm2 = document.getElementById('pinkForm2');
+        const pinkPasswordInput2 = document.getElementById('pinkPassword2');
+        const errorMsgPink2 = document.getElementById('errorMsgPink2');
+// --- Elementos do Rádio ---
+        const radioDial = document.getElementById('radioDial');
+const radioDisplay = document.getElementById('radioDisplay');
+        
+        // (MODIFICADO) Elementos da Carta 1 (1911)
+        const letterLinkContainer = document.getElementById('letterLinkContainer');
+const openLetterLink = document.getElementById('openLetterLink');
+        const letterModal = document.getElementById('letterModal');
+        const closeLetterButton = document.getElementById('closeLetterButton');
+// (NOVO) Elementos da Carta 2 (1073)
+        const transcriptionLinkContainer = document.getElementById('transcriptionLinkContainer');
+const openTranscriptionLink = document.getElementById('openTranscriptionLink');
+        const transcriptionModal = document.getElementById('transcriptionModal');
+        const closeTranscriptionButton = document.getElementById('closeTranscriptionButton');
+        
+        const targetFrequency = 1911;
+// (MODIFICADO) Frequência correta
+        const targetFrequency2 = 1073;
+// (NOVO)
+        const maxFrequencyDistance = 1000;
+// Range (2000 - 1000)
+        const maxStaticVolume = 0.7;
+// Volume máximo da estática (70%)
+        
+        let hasOpenedLetterModal = false;
+// (NOVO) Flag para o modal 1073
+
+
         async function loadAndPlayAudio() {
             try {
-                // 1. Cria o Contexto de Áudio (DEVE ser após um clique)
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                }
+}
                 
-                // 2. Garante que o contexto possa "rodar" (necessário em alguns browsers)
                 if (audioCtx.state === 'suspended') {
                     await audioCtx.resume();
-                }
+}
 
-                // 3. Se o áudio ainda não foi baixado, baixa e decodifica
                 if (!audioBuffer) {
                     console.log('Baixando e decodificando áudio...');
-                    const response = await fetch(audioUrl);
+const response = await fetch(audioUrl);
                     const arrayBuffer = await response.arrayBuffer();
                     audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
                     console.log('Áudio pronto.');
-                }
+}
 
-                // 4. Para qualquer música anterior (se houver)
                 if (sourceNode) {
                     sourceNode.stop();
-                }
+}
 
-                // 5. Cria o "player" (Source Node)
                 sourceNode = audioCtx.createBufferSource();
-                sourceNode.buffer = audioBuffer;
-                sourceNode.loop = true; // <-- A MÁGICA DO LOOP SEM CORTE
+sourceNode.buffer = audioBuffer;
+                sourceNode.loop = true;
 
-                // 6. Cria o controle de volume (Gain Node)
-                const gainNode = audioCtx.createGain();
-                // Define o volume (0.1 = 10%)
-                gainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
+                // (MODIFICADO) Usa a variável global
+                mainGainNode = audioCtx.createGain();
+mainGainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
 
-                // 7. Conecta tudo: Player -> Volume -> Caixas de Som
-                sourceNode.connect(gainNode).connect(audioCtx.destination);
+                sourceNode.connect(mainGainNode).connect(audioCtx.destination);
                 
-                // 8. Toca
                 sourceNode.start(0);
                 musicStarted = true;
                 console.log('Música iniciada com sucesso (gapless).');
-
-            } catch (error) {
+} catch (error) {
                 console.error("Erro ao tocar música com Web Audio API:", error);
-                // Fallback para o método antigo se falhar
-                console.log("Tentando fallback para <audio> tag...");
-                try {
+try {
                     bgMusicPlayer.volume = 0.02;
-                    await bgMusicPlayer.play();
+await bgMusicPlayer.play();
                     musicStarted = true;
                 } catch (fallbackError) {
                     console.error("Erro no fallback do áudio:", fallbackError);
-                }
+}
             }
         }
-        // --- FIM DA NOVA FUNÇÃO ---
 
         async function acceptChallenge() {
             if (!musicStarted) {
-                // --- CHAMADA DA NOVA FUNÇÃO DE ÁUDIO ---
                 await loadAndPlayAudio();
-            }
+}
 
             primaryPage.style.transition = 'opacity 1.5s ease-out';
             primaryPage.style.opacity = '0';
-            
-            setTimeout(() => {
+setTimeout(() => {
                 primaryPage.style.display = 'none';
                 loginPage.style.display = 'block';
                 loginPage.style.opacity = '0';
                 loginPage.style.transition = 'opacity 1.5s ease-in';
                 loginPage.scrollTop = 0;
-                
+      
+
+
+
+          
                 setTimeout(() => {
                     loginPage.style.opacity = '1';
                 }, 50);
             }, 1500);
-        }
+}
 
         function rejectChallenge() {
             const noBtn = document.getElementById('noBtn');
-            const warningMsg = document.getElementById('warningMsg');
+const warningMsg = document.getElementById('warningMsg');
             
             noBtn.classList.add('hidden');
             
             setTimeout(() => {
                 warningMsg.classList.add('show');
             }, 400);
-        }
+}
 
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const enteredPassword = passwordInput.value.trim().toLowerCase();
+            const enteredPassword = passwordInput.value.trim().toLowerCase().replace(/ /g, '_');
             
             if (enteredPassword === correctPassword) {
                 errorMsg.classList.remove('show');
-                
+     
+
+
+
+           
                 loginPage.style.transition = 'opacity 1.5s ease-out';
                 loginPage.style.opacity = '0';
                 
                 setTimeout(() => {
-                    loginPage.style.display = 'none';
-                    mainPage.style.display = 'block';
-                    mainPage.style.opacity = '0';
-                    mainPage.style.transition = 'opacity 1.5s ease-in';
-                    mainPage.scrollTop = 0;
+                 
+
+
+
+   loginPage.style.display = 'none';
+                    document.body.classList.add('purple-theme');
+                    purplePage.style.display = 'block';
+                    purplePage.style.opacity = '0';
+                    purplePage.style.transition = 'opacity 1.5s ease-in';
+       
+
+
+
+             purplePage.scrollTop = 0;
                     
                     setTimeout(() => {
-                        mainPage.style.opacity = '1';
-                    }, 50);
-                
+                         purplePage.style.opacity = '1';
+}, 50);
                 }, 1500);
-                    
+                
                 passwordInput.value = '';
-            } else {
+} else {
                 errorMsg.classList.add('show');
-                passwordInput.value = '';
+passwordInput.value = '';
                 passwordInput.focus();
                 
                 setTimeout(() => {
                     errorMsg.classList.remove('show');
                 }, 3000);
-            }
+}
         });
 
-        secondForm.addEventListener('submit', function(e) {
+        purpleForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const enteredPassword = secondPasswordInput.value.trim().toLowerCase();
+            const enteredPassword = purplePasswordInput.value.trim().toLowerCase();
             
-            if (enteredPassword === secondCorrectPassword) {
-                errorMsg2.classList.remove('show');
-                
-                mainPage.style.transition = 'opacity 1.5s ease-out';
-                mainPage.style.opacity = '0';
+            if (enteredPassword === purpleCorrectPassword) {
+                errorMsg3.classList.remove('show');
+      
+
+
+
+          
+                purplePage.style.transition = 'opacity 1.5s ease-out';
+                purplePage.style.opacity = '0';
                 
                 setTimeout(() => {
-                    mainPage.style.display = 'none';
+                  
+
+
+
+  purplePage.style.display = 'none';
+                    document.body.classList.remove('purple-theme');
+                    document.body.classList.add('golden-theme');
+                    goldenPage.style.display = 'block';
+                    goldenPage.style.opacity = '0';
+            
+
+
+
+        goldenPage.style.transition = 'opacity 1.5s ease-in';
+                    goldenPage.scrollTop = 0;
+                    
+                    setTimeout(() => {
+                        
+
+
+
+goldenPage.style.opacity = '1';
+                    }, 50);
+                }, 1500);
+                
+                purplePasswordInput.value = '';
+} else {
+                errorMsg3.classList.add('show');
+purplePasswordInput.value = '';
+                purplePasswordInput.focus();
+                
+                setTimeout(() => {
+                    errorMsg3.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        function showAshChallenge() {
+            console.log("Timer de 3 minutos concluído. Mostrando o desafio.");
+const ashContent = document.getElementById('ashContent');
+            const ashMessage = document.getElementById('ashMessage');
+            const ashDivider1 = document.getElementById('ashDivider1');
+            
+            const imgFinalWrapper = document.getElementById('ashImageFinalWrapper');
+            const ashForm = document.getElementById('ashForm');
+const ashDivider2 = document.getElementById('ashDivider2');
+
+            // Esconde os textos
+            ashContent.style.display = 'none';
+ashMessage.style.display = 'none';
+            ashDivider1.style.display = 'none';
+            
+            // Mostra a imagem final e o formulário
+            imgFinalWrapper.style.display = 'block';
+ashForm.style.display = 'block';
+            ashDivider2.style.display = 'block';
+
+            // Adiciona a classe de fade-in para animar
+            imgFinalWrapper.classList.add('fade-in');
+ashForm.classList.add('fade-in');
+            ashDivider2.classList.add('fade-in');
+        }
+
+
+        goldenForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredPassword = goldenPasswordInput.value.trim().toLowerCase().replace(/ /g, '_');
+            
+            if (enteredPassword === goldenCorrectPassword) {
+                errorMsgGolden.classList.remove('show');
+
+   
+
+
+
+             goldenPage.style.transition = 'opacity 1.5s ease-out';
+                goldenPage.style.opacity = '0';
+                
+                setTimeout(() => {
+                    goldenPage.style.display = 'none';
+         
+
+
+
+           document.body.classList.remove('golden-theme');
+                    document.body.classList.add('ash-theme');
+                    ashPage.style.display = 'block';
+                    ashPage.style.opacity = '0';
+                    ashPage.style.transition = 'opacity 1.5s ease-in';
+ 
+
+
+
+                   ashPage.scrollTop = 0;
+                    
+                    setTimeout(() => {
+                        ashPage.style.opacity = '1';
+console.log("Página cinza visível. Iniciando timer de 3 minutos...");
+                        setTimeout(showAshChallenge, 180000);
+// 3 minutos = 180,000 ms
+                    }, 50);
+}, 1500);
+                
+                goldenPasswordInput.value = '';
+            } else {
+                errorMsgGolden.classList.add('show');
+goldenPasswordInput.value = '';
+                goldenPasswordInput.focus();
+                
+                setTimeout(() => {
+                    errorMsgGolden.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        ashForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredPassword = ashPasswordInput.value.trim().toLowerCase();
+            
+            if (enteredPassword === ashCorrectPassword || enteredPassword === "santo berco") {
+                errorMsgAsh.classList.remove('show');
+ 
+
+
+
+               
+                ashPage.style.transition = 'opacity 1.5s ease-out';
+                ashPage.style.opacity = '0';
+                
+                setTimeout(() => {
+             
+
+
+
+       ashPage.style.display = 'none';
+                    document.body.classList.remove('ash-theme');
+                    document.body.classList.add('dwarven-theme');
+                    dwarvenPage.style.display = 'block';
+                    dwarvenPage.style.opacity = '0';
+       
+
+
+
+             dwarvenPage.style.transition = 'opacity 1.5s ease-in';
+                    dwarvenPage.scrollTop = 0;
+                    
+                    setTimeout(() => {
+                   
+
+
+
+     dwarvenPage.style.opacity = '1';
+                    }, 50);
+
+                }, 1500);
+                
+                ashPasswordInput.value = '';
+} else {
+                errorMsgAsh.classList.add('show');
+ashPasswordInput.value = '';
+                ashPasswordInput.focus();
+                
+                setTimeout(() => {
+                    errorMsgAsh.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        
+        function checkDwarvenPuzzle() {
+            const season = dwarvenSeasonSelect.value;
+const sun = dwarvenSunSelect.value;
+            const moon = dwarvenMoonSelect.value;
+
+            if (season === dwarvenSeason && sun === dwarvenSun && moon === dwarvenMoon) {
+                errorMsgDwarven.classList.remove('show');
+dwarvenMapWrapper.style.display = 'none';
+                dwarvenMessage.style.display = 'none';
+                dwarvenDivider1.style.display = 'none';
+                dwarvenForm.style.display = 'none';
+                
+                dwarvenRunesMessage.style.display = 'block';
+                dwarvenRunes.style.display = 'block';
+dwarvenRunesForm.style.display = 'block';
+                
+                dwarvenRunesMessage.classList.add('fade-in');
+                dwarvenRunes.classList.add('fade-in');
+                dwarvenRunesForm.classList.add('fade-in');
+
+            } else {
+                if (season && sun && moon) {
+                    errorMsgDwarven.classList.add('show');
+}
+            }
+        }
+        
+        function resetDwarvenPuzzle() {
+            dwarvenSymbol.style.display = 'block';
+dwarvenMapWrapper.style.display = 'block';
+            dwarvenMessage.style.display = 'block';
+            dwarvenDivider1.style.display = 'block';
+            dwarvenForm.style.display = 'flex';
+            dwarvenRunesMessage.style.display = 'none';
+            dwarvenRunes.style.display = 'none';
+dwarvenRunesForm.style.display = 'none';
+            
+            dwarvenRunesMessage.classList.remove('fade-in');
+            dwarvenRunes.classList.remove('fade-in');
+            dwarvenRunesForm.classList.remove('fade-in');
+            
+            errorMsgDwarven.classList.remove('show');
+            errorMsgDwarvenRunes.classList.remove('show');
+            dwarvenSeasonSelect.value = "";
+            dwarvenSunSelect.value = "";
+            dwarvenMoonSelect.value = "";
+            dwarvenRunesPasswordInput.value = "";
+}
+
+        dwarvenSeasonSelect.addEventListener('change', checkDwarvenPuzzle);
+        dwarvenSunSelect.addEventListener('change', checkDwarvenPuzzle);
+        dwarvenMoonSelect.addEventListener('change', checkDwarvenPuzzle);
+dwarvenRunesForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredPassword = dwarvenRunesPasswordInput.value.trim().toLowerCase().replace(/_/g, ' ');
+            
+            if (enteredPassword === dwarvenRunePassword) {
+                errorMsgDwarvenRunes.classList.remove('show');
+             
+
+
+
+   
+                dwarvenPage.style.transition = 'opacity 1.5s ease-out';
+                dwarvenPage.style.opacity = '0';
+                
+                setTimeout(() => {
+                    dwarvenPage.style.display = 'none';
+   
+
+
+
+                 document.body.classList.remove('dwarven-theme');
+                    document.body.classList.add('blue-theme');
+                    dollPage.style.display = 'block';
+                    dollPage.style.opacity = '0';
+                   
+
+
+
+ dollPage.style.transition = 'opacity 1.5s ease-in';
+                    dollPage.scrollTop = 0;
+                    
+                    setTimeout(() => {
+                        dollPage.style.opacity = '1';
+}, 50);
+
+                }, 1500);
+            } else {
+                errorMsgDwarvenRunes.classList.add('show');
+dwarvenRunesPasswordInput.value = '';
+                dwarvenRunesPasswordInput.focus();
+
+                setTimeout(() => {
+                    errorMsgDwarvenRunes.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        dollForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredPassword = dollPasswordInput.value.trim().toLowerCase().replace(/ /g, '_');
+            
+            if (enteredPassword === dollCorrectPassword) {
+                errorMsgDoll.classList.remove('show');
+    
+
+
+
+            
+                dollPage.style.transition = 'opacity 1.5s ease-out';
+                dollPage.style.opacity = '0';
+                
+                setTimeout(() => {
+                
+
+
+
+    dollPage.style.display = 'none';
+                    document.body.classList.remove('blue-theme');
+                    document.body.classList.add('rust-theme');
+                    rustPage.style.display = 'block';
+                    rustPage.style.opacity = '0';
+          
+
+
+
+          rustPage.style.transition = 'opacity 1.5s ease-in';
+                    rustPage.scrollTop = 0;
+                    
+                    setTimeout(() => {
+                      
+
+
+
+  rustPage.style.opacity = '1';
+                    }, 50);
+
+                }, 1500);
+                dollPasswordInput.value = '';
+} else {
+                errorMsgDoll.classList.add('show');
+dollPasswordInput.value = '';
+                dollPasswordInput.focus();
+                
+                setTimeout(() => {
+                    errorMsgDoll.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        function resetDollPage() {
+            if(dollPasswordInput) dollPasswordInput.value = '';
+if(errorMsgDoll) errorMsgDoll.classList.remove('show');
+        }
+
+        // --- LÓGICA DA PÁGINA FERRUGEM (RÁDIO) ---
+        
+        function setupRadioTuner() {
+            if (!radioDial) return;
+// (LÓGICA CORRIGIDA)
+            radioDial.addEventListener('input', function() {
+                // Inicia a estática no primeiro toque
+                if (!staticAudioStarted) {
+                    radioStaticAudio.volume = 0; // Começa mudo
+                   
+
+
+
+ radioStaticAudio.play().catch(e => console.error("Erro ao iniciar estática:", e));
+                    staticAudioStarted = true;
+                }
+
+                const currentValue = parseInt(radioDial.value);
+                radioDisplay.textContent = currentValue + " MHz";
+               
+
+
+
+ 
+                // (MODIFICADO) Calcula a distância apenas para 1911
+                const distance = Math.abs(currentValue - targetFrequency);
+                
+                // Cálculo do Volume (MODIFICADO)
+                let normalizedDistance = 
+
+
+
+distance / maxFrequencyDistance; 
+                let volume = Math.min(normalizedDistance * maxStaticVolume, maxStaticVolume);
+                
+                if (distance === 0) {
+                    volume = 0;
+}
+                
+                // (NOVO) Se o 1073 já foi desbloqueado, ele também fica mudo
+                if (hasOpenedLetterModal && currentValue === targetFrequency2) {
+                    volume = 0;
+}
+
+                if (radioStaticAudio.volume !== volume) {
+                     radioStaticAudio.volume = volume;
+}
+
+                // Efeito de estática visual (brilho)
+                let shadowIntensity = 0;
+// (MODIFICADO) Brilha perto de 1911 ou (se desbloqueado) 1073
+                const distance2 = Math.abs(currentValue - targetFrequency2);
+if (distance < 100) {
+                    shadowIntensity = (100 - distance) / 100 * 15;
+} else if (hasOpenedLetterModal && distance2 < 100) {
+                     shadowIntensity = (100 - distance2) / 100 * 15;
+} else {
+                    shadowIntensity = Math.random() * 2;
+}
+                radioDisplay.style.textShadow = `0 0 ${shadowIntensity + 5}px rgba(127, 255, 0, 0.7)`;
+});
+
+            // (MODIFICADO) Evento 'change' (soltar o mouse) - controla qual link aparece
+            radioDial.addEventListener('change', function() {
+                const currentValue = parseInt(radioDial.value);
+
+                // Alvo 1 (1911)
+                if (currentValue === targetFrequency) {
+                
+
+
+
+    letterLinkContainer.style.display = 'block';
+                    setTimeout(() => letterLinkContainer.style.opacity = '1', 10);
+                } else {
+                    letterLinkContainer.style.opacity = '0';
+                    setTimeout(() => letterLinkContainer.style.display = 'none', 300); 
+   
+
+
+
+             } 
+                
+                // Alvo 2 (1073) - (MODIFICADO) com verificação de flag
+                if (currentValue === targetFrequency2 && hasOpenedLetterModal) {
+                    transcriptionLinkContainer.style.display = 'block';
+ 
+
+
+
+                   setTimeout(() => transcriptionLinkContainer.style.opacity = '1', 10);
+} else {
+                    transcriptionLinkContainer.style.opacity = '0';
+setTimeout(() => transcriptionLinkContainer.style.display = 'none', 300);
+                }
+            });
+}
+        
+        // Chamar a função para ativar o rádio
+        setupRadioTuner();
+// (MODIFICADO) Eventos do Modal da Carta 1 (1911)
+        openLetterLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            letterModal.style.display = 'flex';
+            hasOpenedLetterModal = true; // (NOVO) Seta a flag aqui
+            setTimeout(() => {
+                letterModal.style.opacity = '1';
+    
+
+
+
+        }, 10);
+        });
+closeLetterButton.addEventListener('click', function() {
+            letterModal.style.opacity = '0';
+            setTimeout(() => {
+                letterModal.style.display = 'none';
+            }, 500);
+        });
+letterModal.addEventListener('click', function(e) {
+            if (e.target === letterModal) {
+                 letterModal.style.opacity = '0';
+                setTimeout(() => {
+                    letterModal.style.display = 'none';
+                }, 500);
+      
+
+
+
+      }
+        });
+// (NOVO) Eventos do Modal da Carta 2 (1073)
+        openTranscriptionLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            transcriptionModal.style.display = 'flex';
+            setTimeout(() => {
+                transcriptionModal.style.opacity = '1';
+            }, 10);
+        });
+closeTranscriptionButton.addEventListener('click', function() {
+            transcriptionModal.style.opacity = '0';
+            setTimeout(() => {
+                transcriptionModal.style.display = 'none';
+            }, 500);
+        });
+transcriptionModal.addEventListener('click', function(e) {
+            if (e.target === transcriptionModal) {
+                 transcriptionModal.style.opacity = '0';
+                setTimeout(() => {
+                    transcriptionModal.style.display = 'none';
+                }, 500);
+      
+
+
+
+      }
+        });
+rustForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const enteredPassword = rustPasswordInput.value.trim().toLowerCase();
+            
+            /* (LÓGICA ATUALIZADA - indo para a página rosa) */
+            if (enteredPassword === rustCorrectPassword.toLowerCase()) { 
+         
+
+
+       errorMsgRust.classList.remove('show');
+             
+   
+                rustPage.style.transition = 'opacity 1.5s ease-out';
+                rustPage.style.opacity = '0';
+                
+                setTimeout(() => {
+     
+
+
+               rustPage.style.display = 'none';
+   
+           document.body.classList.remove('rust-theme');
+                    
+                    /* (MUDANÇA) */
+                    document.body.classList.add('pink-theme');
+       
+
+
+             pinkPage.style.display = 'block';
+                    pinkPage.style.opacity = '0';
+                    pinkPage.style.transition = 'opacity 1.5s ease-in';
+pinkPage.scrollTop = 0;
+setTimeout(() => {
+                        pinkPage.style.opacity = '1';
+}, 50);
+}, 1500);
+                
+                rustPasswordInput.value = '';
+            } else {
+                errorMsgRust.classList.add('show');
+rustPasswordInput.value = '';
+                rustPasswordInput.focus();
+                
+                setTimeout(() => {
+                    errorMsgRust.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        /* (FORMULÁRIO ROSA 1 MODIFICADO) */
+        pinkForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPassword = pinkPasswordInput.value.trim().toLowerCase();
+
+            if (enteredPassword === pinkCorrectPassword) { // (Senha "telomeres")
+                errorMsgPink.classList.remove('show');
+
+             
+ 
+
+  pinkPage.style.transition = 'opacity 1.5s ease-out';
+                pinkPage.style.opacity = '0';
+
+                setTimeout(() => {
+                    pinkPage.style.display = 'none';
+                    // document.body.classList.remove('pink-theme'); // Não remove o tema
+
+          
+          /* (MODIFICADO) Vai para a pinkPage2 */
+                    pinkPage2.style.display = 'block';
+                    pinkPage2.style.opacity = '0';
+                    pinkPage2.style.transition = 'opacity 1.5s ease-in';
+                
+    pinkPage2.scrollTop = 0;
+
+                    setTimeout(() => {
+                        pinkPage2.style.opacity = '1';
+}, 50);
+                }, 1500);
+pinkPasswordInput.value = '';
+
+            } else {
+                errorMsgPink.classList.add('show');
+pinkPasswordInput.value = '';
+                pinkPasswordInput.focus();
+
+                setTimeout(() => {
+                    errorMsgPink.classList.remove('show');
+                }, 3000);
+}
+        });
+
+        /* (FORMULÁRIO ROSA 2 MODIFICADO) */
+        pinkForm2.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const enteredPassword = pinkPasswordInput2.value.trim().toLowerCase();
+
+            if (enteredPassword === pinkCorrectPassword2) { // (Senha ATUALIZADA)
+                errorMsgPink2.classList.remove('show');
+
+              
+  pinkPage2.style.transition = 'opacity 1.5s ease-out';
+                pinkPage2.style.opacity = '0';
+
+                setTimeout(() => {
+                    pinkPage2.style.display = 'none';
+                    document.body.classList.remove('pink-theme'); // Agora sim remove o tema
+
+          
+          /* (MODIFICADO) Vai para a finalPage */
                     finalPage.style.display = 'block';
                     finalPage.style.opacity = '0';
                     finalPage.style.transition = 'opacity 1.5s ease-in';
-                    finalPage.scrollTop = 0;
-                    
-                    setTimeout(() => {
-                        finalPage.style.opacity = '1';
+finalPage.scrollTop = 0;
+
+              
+      setTimeout(() => {
+finalPage.style.opacity = '1';
                     }, 50);
-                
                 }, 1500);
-                
-                secondPasswordInput.value = '';
-            } else {
-                errorMsg2.classList.add('show');
-                secondPasswordInput.value = '';
-                secondPasswordInput.focus();
-                
+                pinkPasswordInput2.value = '';
+} else {
+                errorMsgPink2.classList.add('show');
+pinkPasswordInput2.value = '';
+                pinkPasswordInput2.focus();
                 setTimeout(() => {
-                    errorMsg2.classList.remove('show');
+                    errorMsgPink2.classList.remove('show');
                 }, 3000);
-            }
+}
         });
+
+
+        function resetRustPage() {
+            if(rustPasswordInput) rustPasswordInput.value = '';
+if(errorMsgRust) errorMsgRust.classList.remove('show');
+            
+            // (MODIFICADO) Reseta o rádio para o valor inicial
+            if(radioDial) radioDial.value = 1500;
+if(radioDisplay) radioDisplay.textContent = "1500 MHz";
+            
+            // (NOVO) Reseta a flag e esconde links/modais
+            hasOpenedLetterModal = false;
+if(letterLinkContainer) {
+                letterLinkContainer.style.opacity = '0';
+letterLinkContainer.style.display = 'none';
+            }
+            if(letterModal) {
+                letterModal.style.opacity = '0';
+letterModal.style.display = 'none';
+            }
+            if(transcriptionLinkContainer) {
+                transcriptionLinkContainer.style.opacity = '0';
+transcriptionLinkContainer.style.display = 'none';
+            }
+            if(transcriptionModal) {
+                transcriptionModal.style.opacity = '0';
+transcriptionModal.style.display = 'none';
+            }
+
+            // (MODIFICADO) Inicia a estática
+            if (!staticAudioStarted) {
+                radioStaticAudio.currentTime = 0;
+// Começa com o volume de 1500 MHz (baseado em 1911)
+                const distance = Math.abs(1500 - targetFrequency);
+let volume = Math.min((distance / maxFrequencyDistance) * maxStaticVolume, maxStaticVolume);
+                radioStaticAudio.volume = volume;
+                
+                radioStaticAudio.play().catch(e => console.error("Erro ao iniciar estática:", e));
+staticAudioStarted = true;
+            } else {
+                // Se já estiver tocando, apenas ajusta o volume (baseado em 1911)
+                const distance = Math.abs(1500 - targetFrequency);
+let volume = Math.min((distance / maxFrequencyDistance) * maxStaticVolume, maxStaticVolume);
+                radioStaticAudio.volume = volume;
+}
+        }
+        // --- FIM DA LÓGICA DA PÁGINA FERRUGEM ---
+        
+        /*
+        *
+        * (FUNÇÃO goToPage ATUALIZADA)
+        *
+        */
+        function goToPage(pageId) {
+            const allScreens = 
+[
+                document.getElementById('primaryPage'),
+                document.getElementById('loginPage'),
+           
+
+
+     document.getElementById('purplePage'),
+                document.getElementById('goldenPage'),
+                document.getElementById('ashPage'),
+                document.getElementById('dwarvenPage'), 
+   
+             document.getElementById('dollPage'), 
+                document.getElementById('rustPage'), 
+            
+
+    document.getElementById('pinkPage'),
+            
+    document.getElementById('pinkPage2'), /* (PÁGINA ADICIONADA) */
+            
+    document.getElementById('finalPage')
+            ];
+// (MODIFICADO) Lógica para parar/controlar áudios
+            if (pageId === 'rustPage') {
+                // Mute main music
+                if (mainGainNode) {
+                    mainGainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+} else if (musicStarted) {
+                    bgMusicPlayer.volume = 0;
+// Fallback
+                }
+            } else {
+                // Unmute main music
+                if (mainGainNode) {
+                    mainGainNode.gain.setValueAtTime(0.02, audioCtx.currentTime);
+} else if (musicStarted) {
+                    bgMusicPlayer.volume = 0.02;
+// Fallback
+                }
+                
+                // Para a estática se estivermos saindo da página de ferrugem
+                if (staticAudioStarted) {
+                    radioStaticAudio.pause();
+radioStaticAudio.currentTime = 0;
+                    staticAudioStarted = false;
+                }
+            }
+            
+            allScreens.forEach(screen => {
+                if (screen) screen.style.display = 'none';
+            });
+document.body.classList.remove('purple-theme', 'golden-theme', 'ash-theme', 'dwarven-theme', 'blue-theme', 'rust-theme', 'pink-theme'); /* (TEMA ADICIONADO) */
+
+            const targetPage = document.getElementById(pageId);
+if (targetPage) {
+                
+                /* --- (LÓGICA CORRIGIDA) --- */
+                if (pageId === 'finalPage') {
+                    targetPage.style.display = 'flex';
+// 'flex' para centralizar a pág final
+                } else {
+                    targetPage.style.display = 'block';
+// 'block' para todas as outras
+                }
+                /* --- FIM DA CORREÇÃO --- */
+
+targetPage.scrollTop = 0;
+targetPage.style.opacity = 1; 
+            }
+
+            if (pageId === 'purplePage') {
+                document.body.classList.add('purple-theme');
+} else if (pageId === 'goldenPage') {
+                document.body.classList.add('golden-theme');
+} else if (pageId === 'ashPage') {
+                document.body.classList.add('ash-theme');
+showAshChallenge(); 
+            } else if (pageId === 'dwarvenPage') { 
+                document.body.classList.add('dwarven-theme');
+resetDwarvenPuzzle();
+            } else if (pageId === 'dollPage') { 
+                document.body.classList.add('blue-theme');
+resetDollPage();
+            } else if (pageId === 'rustPage') { 
+                document.body.classList.add('rust-theme');
+resetRustPage(); // Esta função agora INICIA a estática
+            } else if (pageId === 'pinkPage') { /* (LÓGICA ADICIONADA) */
+                document.body.classList.add('pink-theme');
+/* (Adicione uma função resetPinkPage() se necessário) */
+            } else if (pageId === 'pinkPage2') { /* (LÓGICA ADICIONADA) */
+                document.body.classList.add('pink-theme');
+/* (Adicione uma função resetPinkPage2() se necessário) */
+            }
+            
+            if (!musicStarted && pageId !== 'primaryPage') { 
+                loadAndPlayAudio();
+}
+        }
+
     </script>
 </body>
 </html>
